@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'd3-network-graph';
+  title = 'Welcome to Angular Network Graph';
 }
