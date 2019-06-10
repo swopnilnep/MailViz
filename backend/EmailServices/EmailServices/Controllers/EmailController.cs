@@ -11,7 +11,7 @@ namespace EmailServices.Controllers
     public class EmailController : ApiController
     {
 
-        // Get all email addresses (and related entires)
+        // Get all data for all email address ids
         public IEnumerable< tbl_ex_EmailAddresses > Get()
         {
 
@@ -22,14 +22,16 @@ namespace EmailServices.Controllers
 
         }
 
-        // Get email address by id (and related entries)
+        // Get data by email address id
         public tbl_ex_EmailAddresses Get(int id)
         {
-            using(EmailDetailsEntities entities = new EmailDetailsEntities)
+            using(EmailDetailsEntities entities = new EmailDetailsEntities())
             {
                 return entities.tbl_ex_EmailAddresses.FirstOrDefault(e => e.EmailAddressID == id);
             }
         }
+
+
 
     }
 }
