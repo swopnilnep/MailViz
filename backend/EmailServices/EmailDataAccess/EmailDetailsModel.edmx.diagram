@@ -1,0 +1,373 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="6a470f448fd74b3d94eae8a0d4f76afd" Name="Diagram1">
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_an_EmailNodes" Width="1.5" PointX="0.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_ann_AnnotationActionLog" Width="1.5" PointX="0.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_ann_AnnotationDetail" Width="1.5" PointX="12.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_ann_CustomStamp" Width="1.5" PointX="12.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_ann_RedactionObjects" Width="1.5" PointX="0.75" PointY="19.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_ann_RedactionReason" Width="1.5" PointX="2.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_ann_RedactionSetPrjGrpAsso" Width="1.5" PointX="14.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_ann_RedactionType" Width="1.5" PointX="4.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_cmt_Comment" Width="1.5" PointX="5.25" PointY="25" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_cmt_CommentFileReference" Width="1.5" PointX="7.5" PointY="16.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_del_deletedfile" Width="1.5" PointX="28.75" PointY="24.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_ds_ProcessingInstanceLog_" Width="1.5" PointX="20.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_ds_ProjectJobInfo" Width="1.5" PointX="16" PointY="12" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_ep_BateNumbers" Width="1.5" PointX="20.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_ep_ControlNumbers" Width="1.5" PointX="22.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_ep_ExportArchiveInfo" Width="1.5" PointX="22.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_ep_ExportDetails" Width="1.5" PointX="7.75" PointY="23.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_ep_ExportFolderDetails" Width="1.5" PointX="22.75" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_ep_ExportPrimaryTable" Width="1.5" PointX="24.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_ep_Exports" Width="1.5" PointX="22.75" PointY="27.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_ep_ExportSecondaryTable" Width="1.5" PointX="9.75" PointY="23.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_ep_ExportTiffPrimaryTable" Width="1.5" PointX="26.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_ep_ExportTiffSecondaryTable" Width="1.5" PointX="28.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.Tbl_Ep_ExportVolumes" Width="1.5" PointX="17.75" PointY="24.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.Tbl_Ep_FulltextDetails" Width="1.5" PointX="28.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.Tbl_Ep_NativeDetails" Width="1.5" PointX="30.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_ep_OverlayDuplicateCustodian" Width="1.5" PointX="28.75" PointY="16.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.Tbl_Ep_OverlayDuplicateFilePath" Width="1.5" PointX="30.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.Tbl_Ep_PdfDetails" Width="1.5" PointX="30.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.Tbl_Ep_TiffDetails" Width="1.5" PointX="30.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_ep_TiffExportDetails" Width="1.5" PointX="30.75" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_ex_CodingActionLog" Width="1.5" PointX="7.75" PointY="20" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_ex_CodingHistory" Width="1.5" PointX="10" PointY="20" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_ex_ConvertedDXLFileLocation" Width="1.5" PointX="30.75" PointY="24.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_ex_CrashedFileLog" Width="1.5" PointX="30.75" PointY="28.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_ex_Custodian" Width="1.5" PointX="25.75" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_ex_CustomInfo" Width="1.5" PointX="31.75" PointY="19.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_ex_DuplicateCustodian" Width="1.5" PointX="32.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_ex_DuplicateFilePath" Width="1.5" PointX="32.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_ex_EdocMeta" Width="1.5" PointX="32.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_ex_EmailAddresses" Width="1.5" PointX="32.75" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_ex_emailaddresslist" Width="1.5" PointX="9.75" PointY="16" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_ex_EmailConversationId" Width="1.5" PointX="32.75" PointY="22.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_ex_EmailMeta" Width="1.5" PointX="32.75" PointY="25.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_ex_EmailNameInfo" Width="1.5" PointX="25.75" PointY="33.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_ex_Errorlog" Width="1.5" PointX="34.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_ex_ExtractLocation" Width="1.5" PointX="33.75" PointY="19.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_ex_FileInfo" Width="1.5" PointX="20.75" PointY="14.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_ex_FileInfoReplacementLog" Width="1.5" PointX="34.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_ex_filelanguage" Width="1.5" PointX="34.75" PointY="22.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_ex_FilesNotToReprocess" Width="1.5" PointX="34.75" PointY="25.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_ex_filetagassociation" Width="1.5" PointX="34.75" PointY="28.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_ex_FilteredDocs" Width="1.5" PointX="34.75" PointY="31.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_ex_FulltextFileLocation" Width="1.5" PointX="36.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_ex_FulltextReplacement" Width="1.5" PointX="36.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_ex_FulltextReplacementLog" Width="1.5" PointX="36.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_ex_GroupEmailList" Width="1.5" PointX="12" PointY="16.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_ex_HiddenFulltextFileLocation" Width="1.5" PointX="35.75" PointY="19.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_ex_HTMLFileLocation" Width="1.5" PointX="36.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_ex_HTMLFileParts" Width="1.5" PointX="36.75" PointY="22.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_ex_InclusiveEmailDetails" Width="1.5" PointX="36.75" PointY="16.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_ex_IndexStatusLog" Width="1.5" PointX="26" PointY="17.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_ex_IngestionBookmark" Width="1.5" PointX="36.75" PointY="26.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_ex_Media" Width="1.5" PointX="28" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_ex_MediaSourceAssociation" Width="1.5" PointX="18.5" PointY="35.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_ex_MissingEmailGenerated" Width="1.5" PointX="30.75" PointY="36.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_ex_ModuleLogin" Width="1.5" PointX="36.75" PointY="32.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.Tbl_Ex_NativeReplacement" Width="1.5" PointX="36.75" PointY="36.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_ex_PasswordBank" Width="1.5" PointX="20.75" PointY="35.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_ex_PrivilegeHighlightTerm" Width="1.5" PointX="25.75" PointY="37.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_ex_ReplacementJob" Width="1.5" PointX="32.75" PointY="37.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_ex_RTFFileLocation" Width="1.5" PointX="23" PointY="17.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_ex_SavedSearchResults" Width="1.5" PointX="38.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_ex_searchlog" Width="1.5" PointX="38.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_Ex_searchmediadetail" Width="1.5" PointX="37.75" PointY="19.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_ex_searchserverlog" Width="1.5" PointX="38.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_ex_searchtermexpandlog" Width="1.5" PointX="38.75" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_eX_searchtermslist" Width="1.5" PointX="38.75" PointY="22.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_ex_SearchTermsTagAssociation" Width="1.5" PointX="3" PointY="25.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_ex_tag" Width="1.5" PointX="0.75" PointY="34.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_Ex_TagActionLog" Width="1.5" PointX="0.75" PointY="26.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_ex_TagHistory" Width="1.5" PointX="3" PointY="30.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_ex_tagsearchmode" Width="1.5" PointX="38.75" PointY="25.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_ex_UniqueIdReserve" Width="1.5" PointX="27.75" PointY="38.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_fd_DynamicFolderPrjGrpAsso" Width="1.5" PointX="38.75" PointY="28.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_fd_FolderActionLog" Width="1.5" PointX="10.75" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_fd_FolderFilesAssociation" Width="1.5" PointX="38.75" PointY="31.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_fd_FolderHierarchy" Width="1.5" PointX="10.75" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_fd_folderHistory" Width="1.5" PointX="13" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_fd_ProjectDynamicFolder" Width="1.5" PointX="38.75" PointY="34.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_fl_SequenceTable" Width="1.5" PointX="39.75" PointY="18.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_fld_CustomFieldInfo" Width="1.5" PointX="34.75" PointY="39.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_ft_FullTextMaster" Width="1.5" PointX="36.75" PointY="39.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_ft_ImageFullText" Width="1.5" PointX="38.75" PointY="39.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_ig_EmbeddedFilteredFiles" Width="1.5" PointX="40.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_ig_ExceptionLog" Width="1.5" PointX="40.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_ig_FamilyCount" Width="1.5" PointX="40.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_ig_FileTypesComponent" Width="1.5" PointX="40.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_ig_FileTypeTimeoutLog" Width="1.5" PointX="7.75" PointY="11" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_ig_IngestionJobList" Width="1.5" PointX="40.75" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_ig_InvalidDate" Width="1.5" PointX="23" PointY="20.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_ig_MediaCopyStatus" Width="1.5" PointX="40.75" PointY="21.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_ig_NSFUserIdFileLocation" Width="1.5" PointX="40.75" PointY="25.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_ig_NSFView" Width="1.5" PointX="40.75" PointY="29.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_ig_PasswordReprocessLog" Width="1.5" PointX="23" PointY="23.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_ig_TimeOutByFiletype" Width="1.5" PointX="10" PointY="10" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_ig_TimeoutJobAssociation" Width="1.5" PointX="10" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_ig_WarningLog" Width="1.5" PointX="40.75" PointY="32.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_imp_DateFormat" Width="1.5" PointX="40.75" PointY="36.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_imp_ImportDetails" Width="1.5" PointX="20.75" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_imp_ImportLog" Width="1.5" PointX="40.75" PointY="39.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_jb_ExportData" Width="1.5" PointX="41.75" PointY="17.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_jb_GenericJobDetail" Width="1.5" PointX="18.25" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_jb_Import" Width="1.5" PointX="25.75" PointY="41.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_jb_ImportAnalysis" Width="1.5" PointX="27.75" PointY="41.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_jb_ImportLoadFileFormat" Width="1.5" PointX="42.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_jb_ImportProgress" Width="1.5" PointX="23" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_jb_InclusiveEmail" Width="1.5" PointX="42.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_jb_Ingestion" Width="1.5" PointX="42.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_jb_IngestionFileExpansion" Width="1.5" PointX="42.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_jb_MissingEmailGeneration" Width="1.5" PointX="42.75" PointY="20.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_jb_NDDJob" Width="1.5" PointX="26" PointY="22.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_jb_ocrGeneratedTiff" Width="1.5" PointX="42.75" PointY="24.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_jb_OcrRedactedTiff" Width="1.5" PointX="18.25" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_jb_PrintDetails" Width="1.5" PointX="42.75" PointY="28.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.Tbl_Jb_PrintPageDetails" Width="1.5" PointX="29.75" PointY="42.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_jb_PromoteDocumentInformation" Width="1.5" PointX="31.75" PointY="42.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_jb_PromoteFileCopy" Width="1.5" PointX="42.75" PointY="32.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_jb_PromoteWorkProduct" Width="1.5" PointX="42.75" PointY="39.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_jb_RTFJob" Width="1.5" PointX="18.25" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.Tbl_JB_ScanSource" Width="1.5" PointX="13.75" PointY="43.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_jb_Search" Width="1.5" PointX="8" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_jb_TiffPreQC" Width="1.5" PointX="18.25" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_lg_AuditLog" Width="1.5" PointX="43.75" PointY="16.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_lg_AutoCollectedFileLog" Width="1.5" PointX="7.5" PointY="31.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_lg_AutoCollectionLog" Width="1.5" PointX="5.25" PointY="31.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_lg_DocumentViewerLog" Width="1.5" PointX="42.75" PointY="43.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_lg_GenericLog" Width="1.5" PointX="44.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_lg_ImportLog" Width="1.5" PointX="3" PointY="16.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_lg_ProcessLog" Width="1.5" PointX="44.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_lg_UserActionLog" Width="1.5" PointX="44.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_ocr_AutoTiffOcrFileTypeEnabled" Width="1.5" PointX="44.75" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_ocr_CancelledLog" Width="1.5" PointX="10.75" PointY="44.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_ocr_Partial_Text" Width="1.5" PointX="15.75" PointY="44.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_ocr_SelectedList" Width="1.5" PointX="17.75" PointY="44.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_ocr_Shadow" Width="1.5" PointX="19.75" PointY="44.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_pj_DateRestriction" Width="1.5" PointX="44.75" PointY="20.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_pj_DefaultFileTypeNativeOption" Width="1.5" PointX="44.75" PointY="24.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_pj_DefaultFileTypeNativeOptionAssociation" Width="1.5" PointX="44.75" PointY="27.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_pj_FileTypeRestriction" Width="1.5" PointX="44.75" PointY="30.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_pj_FullTextPriority" Width="1.5" PointX="44.75" PointY="33.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_pj_GroupActivityLog" Width="1.5" PointX="44.75" PointY="36.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_pj_GroupInfo" Width="1.5" PointX="0.75" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_pj_GroupRestrictFolderAssociation" Width="1.5" PointX="36.75" PointY="44.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_pj_GroupRightAssociation" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_pj_HTMLConversionSettings" Width="1.5" PointX="38.75" PointY="44.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_pj_ProjectSetting" Width="1.5" PointX="44.75" PointY="39.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_pj_upgradeLog" Width="1.5" PointX="44.75" PointY="42.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_pr_FileInfoPromoteFileAssociation" Width="1.5" PointX="45.75" PointY="16.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_pr_PromoteFile" Width="1.5" PointX="25.75" PointY="45.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_prt_PrintTiffSettings" Width="1.5" PointX="27.75" PointY="45.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_ps_ScanFileInfo" Width="1.5" PointX="33.75" PointY="45.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_qc_DocSet" Width="1.5" PointX="26.75" PointY="27.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_qc_DocSetFileAssociation" Width="1.5" PointX="29" PointY="20" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_qc_Document" Width="1.5" PointX="23" PointY="36" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_qc_Image" Width="1.5" PointX="23" PointY="39.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_qc_Note" Width="1.5" PointX="46.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_QC_PreQCImage" Width="1.5" PointX="23" PointY="42.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_qc_UserFieldAssociation" Width="1.5" PointX="46.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_rev_BatchFileAssociation" Width="1.5" PointX="7.5" PointY="37.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_rev_CustomField" Width="1.5" PointX="46.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_rev_EmailAlertReceiver" Width="1.5" PointX="5.25" PointY="34.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_rev_FileInfo" Width="1.5" PointX="5.25" PointY="11.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_rev_ReviewBatch" Width="1.5" PointX="5.25" PointY="37" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_rev_ReviewerSettings" Width="1.5" PointX="5.25" PointY="40.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.Tbl_Rev_ReviewerWorkSchedule" Width="1.5" PointX="5.25" PointY="44.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_rev_ReviewSet" Width="1.5" PointX="8.25" PointY="40.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_rev_ReviewSetInfo" Width="1.5" PointX="3" PointY="34.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_rev_TagGroupSortOrder" Width="1.5" PointX="8.25" PointY="44" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_rev_TagSortOrder" Width="1.5" PointX="10.25" PointY="37.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_sh_SearchJobExpression" Width="1.5" PointX="5.75" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_sh_SearchJobTerm" Width="1.5" PointX="8" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_sm_sampletagtrackinfo" Width="1.5" PointX="46.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_sm_SamplingFileIdAssociation" Width="1.5" PointX="46.75" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_sm_samplinginfo" Width="1.5" PointX="46.75" PointY="20.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_st_EmailNotificationInfo" Width="1.5" PointX="46.75" PointY="27.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_st_StateErrorInfo" Width="1.5" PointX="29.75" PointY="46.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_su_filetypesummary" Width="1.5" PointX="46.75" PointY="30.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_su_languagesummary" Width="1.5" PointX="46.75" PointY="33.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_su_medialevelcountsummary" Width="1.5" PointX="46.75" PointY="36.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.Tbl_tg_TagGroup" Width="1.5" PointX="10.75" PointY="26.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_tg_TagGroupAssociation" Width="1.5" PointX="10" PointY="35" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_tg_TagProjectGroupAssociation" Width="1.5" PointX="40.75" PointY="46.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_tg_TagRuleDetail" Width="1.5" PointX="15" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_tg_TagRuleInfo" Width="1.5" PointX="12.75" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_tiff_CancelledLog" Width="1.5" PointX="42.75" PointY="46.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_tiff_ExtensionImagerPluginAssociation" Width="1.5" PointX="5.75" PointY="47.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_tiff_filetype_pagelimit" Width="1.5" PointX="11.75" PointY="47.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_tiff_FileTypeImagerPluginAssociation" Width="1.5" PointX="13.75" PointY="47.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_tiff_ImagerPluginSettings" Width="1.5" PointX="15.75" PointY="47.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.Tbl_tiff_Images" Width="1.5" PointX="35.75" PointY="47.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_tiff_Shadow" Width="1.5" PointX="48.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_tiff_skipInformation" Width="1.5" PointX="47.75" PointY="16.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_tiff_SystemBates" Width="1.5" PointX="48.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_tiff_tag" Width="1.5" PointX="48.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_Var_BalanceSeedModeInfo" Width="1.5" PointX="48.75" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_var_BatchFilesSwapInfo" Width="1.5" PointX="48.75" PointY="19.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_VAR_BestTrainingParameter" Width="1.5" PointX="48.75" PointY="24.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_Var_BookmarkBatchInfo" Width="1.5" PointX="25.75" PointY="48.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_VAR_CategoryInfo" Width="1.5" PointX="10" PointY="30.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_VAR_CategoryTrainingSources" Width="1.5" PointX="16" PointY="19.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_VAR_CG_shadow" Width="1.5" PointX="18.25" PointY="15" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_var_ControlSetLog" Width="1.5" PointX="48.75" PointY="28.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_VAR_DF_Files" Width="1.5" PointX="15.25" PointY="24" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_VAR_ErrorCodeInfo" Width="1.5" PointX="48.75" PointY="32.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_VAR_JobInitiatedStatus" Width="1.5" PointX="18.25" PointY="27" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_VAR_Model_Files" Width="1.5" PointX="15.25" PointY="29.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_VAR_Prediction_shadow" Width="1.5" PointX="18.25" PointY="20.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_VAR_PredictionResult" Width="1.5" PointX="15.25" PointY="32.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_VAR_Problem_Files" Width="1.5" PointX="15.25" PointY="35.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_VAR_ProfileGenericLogAssociation" Width="1.5" PointX="48.75" PointY="35.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_VAR_ProfileInfo" Width="1.5" PointX="13" PointY="24.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_VAR_ProfileReviewSetAssociation" Width="1.5" PointX="11.25" PointY="40.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_VAR_ProfileReviewSetLog" Width="1.5" PointX="15.25" PointY="38.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_var_QCPredictionResult" Width="1.5" PointX="37.75" PointY="48.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_VAR_RejectedTrainingItems" Width="1.5" PointX="20.5" PointY="40.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_VAR_ReviewBatchStatistics" Width="1.5" PointX="48.75" PointY="38.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_VAR_ReviewSetTypeInfo" Width="1.5" PointX="9" PointY="47.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_VAR_TF_shadow" Width="1.5" PointX="18.25" PointY="39.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_VAR_TrainingItemLog" Width="1.5" PointX="48.75" PointY="43.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_VAR_TrainingItems" Width="1.5" PointX="18.25" PointY="30.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_VAR_TrainingLog" Width="1.5" PointX="48.75" PointY="47.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_VAR_TrainingSourceInfo" Width="1.5" PointX="13.75" PointY="20" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_VOD_ProductionSettings" Width="1.5" PointX="7.75" PointY="49.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_VODR_ServiceSubmitCustodianMediaAssociation" Width="1.5" PointX="49.75" PointY="16.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_del_deletedmedia" Width="1.5" PointX="21.75" PointY="49.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_del_DeletionDuplicationChanges" Width="1.5" PointX="31.75" PointY="49.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_en_auditlog" Width="1.5" PointX="39.75" PointY="49.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_ex_EmailAddresses_Sent" Width="1.5" PointX="41.75" PointY="49.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_Ex_EmailAddressToParse" Width="1.5" PointX="43.75" PointY="49.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_ex_lockhandle" Width="1.5" PointX="50.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_ex_metadata" Width="1.5" PointX="23" PointY="46.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_ex_MissingEmailParserRegex" Width="1.5" PointX="0.75" PointY="50.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_ex_printlog" Width="1.5" PointX="2.75" PointY="50.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_ex_SpamTag" Width="1.5" PointX="50.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_fld_AvailableReviewField" Width="1.5" PointX="5.25" PointY="59.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_fld_CodingValues" Width="1.5" PointX="4.75" PointY="50.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_fld_GroupFieldAssociation" Width="1.5" PointX="3" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_fld_GroupFieldComponentAssociation" Width="1.5" PointX="50.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_fld_RevDisplayCodingFields" Width="1.5" PointX="50.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_fld_ReviewFieldComponentAssocation" Width="1.5" PointX="9.75" PointY="50.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_fld_UserFieldAssociation" Width="1.5" PointX="11.75" PointY="50.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_ig_ArchiveAsEdocs" Width="1.5" PointX="50.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_jb_EmailNotification" Width="1.5" PointX="13.75" PointY="50.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_jb_SkippedJobFiles" Width="1.5" PointX="26" PointY="14.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_lg_DocumentAuditHistory" Width="1.5" PointX="15.75" PointY="50.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_lg_ProjectAuditHistory" Width="1.5" PointX="17.75" PointY="50.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_lg_ScanFileErrorLog" Width="1.5" PointX="50.75" PointY="19.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_ndd_chunks" Width="1.5" PointX="50.75" PointY="23.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.Tbl_Ocr_Language" Width="1.5" PointX="50.75" PointY="26.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_pj_GroupUserAssociation" Width="1.5" PointX="3" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_pj_SearchActionSettings" Width="1.5" PointX="27.75" PointY="50.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_rev_RedactionReviewsetAssociation" Width="1.5" PointX="50.75" PointY="29.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_rev_UserReviewAssociation" Width="1.5" PointX="5.25" PointY="62" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_su_domainsummary" Width="1.5" PointX="50.75" PointY="32.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_tiff_imported" Width="1.5" PointX="50.75" PointY="35.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_tiff_ImportedLog" Width="1.5" PointX="50.75" PointY="38.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_tiff_replaced_files" Width="1.5" PointX="50.75" PointY="41.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_usr_ReviewSetUserSelectedField" Width="1.5" PointX="50.75" PointY="44.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_VAR_Prediction_shadow_error_docs" Width="1.5" PointX="50.75" PointY="48.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_VAR_Prediction_shadow_summary" Width="1.5" PointX="51.75" PointY="16.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_var_PredictionResultSummary" Width="1.5" PointX="23.75" PointY="51.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_VAR_PredictionTrainingModelAssociation" Width="1.5" PointX="52.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_VAR_TF_CG_shadow_summary" Width="1.5" PointX="52.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_VAR_TF_Files" Width="1.5" PointX="15.25" PointY="41" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_vod_ExportDownLoadedLog" Width="1.5" PointX="6.75" PointY="52.75" IsExpanded="true" />
+        <AssociationConnector Association="EmailDetailsModel.FK_tbl_cmt_CommentFileReference_CommentId_tbl_cmt_Comment" ManuallyRouted="false" />
+        <AssociationConnector Association="EmailDetailsModel.FK_tbl_cmt_CommentFileReference_FileId_CommentId_tbl_cmt_Comment" ManuallyRouted="false" />
+        <AssociationConnector Association="EmailDetailsModel.FK_tbl_ds_ProjectJobInfo" ManuallyRouted="false" />
+        <AssociationConnector Association="EmailDetailsModel.FK_tbl_ex_IndexStatusLog_tbl_ds_ProjectJobInfo" ManuallyRouted="false" />
+        <AssociationConnector Association="EmailDetailsModel.FK_tbl_jb_GenericJobDetail_tbl_ds_ProjectJobInfo" ManuallyRouted="false" />
+        <AssociationConnector Association="EmailDetailsModel.FK_tbl_jb_NDDJob_tbl_ds_ProjectJobInfo" ManuallyRouted="false" />
+        <AssociationConnector Association="EmailDetailsModel.FK_tbl_jb_ocrRedactedTiff_tbl_ds_ProjectJobInfo" ManuallyRouted="false" />
+        <AssociationConnector Association="EmailDetailsModel.FK_tbl_jb_RTFJob_tbl_ds_ProjectJobInfo" ManuallyRouted="false" />
+        <AssociationConnector Association="EmailDetailsModel.FK_tbl_jb_SkippedJobFiles_JobId_tbl_ds_ProjectJobInfo_JobId" ManuallyRouted="false" />
+        <AssociationConnector Association="EmailDetailsModel.FK_tbl_jb_TiffPreQC_tbl_ds_ProjectJobInfo" ManuallyRouted="false" />
+        <AssociationConnector Association="EmailDetailsModel.FK_tbl_VAR_CG_shadow_tbl_ds_ProjectJobInfo" ManuallyRouted="false" />
+        <AssociationConnector Association="EmailDetailsModel.FK_tbl_VAR_JobInitiatedStatus_tbl_ds_ProjectJobInfo" ManuallyRouted="false" />
+        <AssociationConnector Association="EmailDetailsModel.FK_tbl_VAR_Prediction_shadow_tbl_ds_ProjectJobInfo" ManuallyRouted="false" />
+        <AssociationConnector Association="EmailDetailsModel.FK_tbl_VAR_TF_shadow_tbl_ds_ProjectJobInfo" ManuallyRouted="false" />
+        <AssociationConnector Association="EmailDetailsModel.FK_tbl_ex_CodingHistory_tbl_ex_CodingActionLog" ManuallyRouted="false" />
+        <AssociationConnector Association="EmailDetailsModel.FK_tbl_ex_Media_tbl_ex_Custodian" ManuallyRouted="false" />
+        <AssociationConnector Association="EmailDetailsModel.FK_tbl_ex_GroupEmailList_tbl_ex_emailaddresslist" ManuallyRouted="false" />
+        <AssociationConnector Association="EmailDetailsModel.FK__tbl_ex_me__FileI__4119A21D" ManuallyRouted="false" />
+        <AssociationConnector Association="EmailDetailsModel.FK_tbl_ex_FileInfo" ManuallyRouted="false" />
+        <AssociationConnector Association="EmailDetailsModel.FK_tbl_ex_FileInfo_FileId" ManuallyRouted="false" />
+        <AssociationConnector Association="EmailDetailsModel.FK_tbl_ex_IndexStatusLog_tbl_ex_FileInfo_FileId" ManuallyRouted="false" />
+        <AssociationConnector Association="EmailDetailsModel.FK_tbl_ex_RTFFileLocation_tbl_ex_FileInfo" ManuallyRouted="false" />
+        <AssociationConnector Association="EmailDetailsModel.FK_tbl_jb_NDDJob_tbl_ex_FileInfo" ManuallyRouted="false" />
+        <AssociationConnector Association="EmailDetailsModel.FK_tbl_jb_SkippedJobFiles_FileID_tbl_ex_FileInfo_FileId" ManuallyRouted="false" />
+        <AssociationConnector Association="EmailDetailsModel.FK_tbl_qc_DocSetFileAssociation_tbl_ex_FileInfo1" ManuallyRouted="false" />
+        <AssociationConnector Association="EmailDetailsModel.FK_tbl_QC_Document_tbl_ex_FileInfo" ManuallyRouted="false" />
+        <AssociationConnector Association="EmailDetailsModel.FK_tbl_QC_Image_tbl_ex_FileInfo" ManuallyRouted="false" />
+        <AssociationConnector Association="EmailDetailsModel.FK_tbl_QC_PreQCImage_tbl_ex_FileInfo" ManuallyRouted="false" />
+        <AssociationConnector Association="EmailDetailsModel.FK_tbl_ex_MediaSourceAssociation" ManuallyRouted="false" />
+        <AssociationConnector Association="EmailDetailsModel.FK_tbl_ex_PasswordBank" ManuallyRouted="false" />
+        <AssociationConnector Association="EmailDetailsModel.FK__tbl_ex_Se__TagId__08D548FA" ManuallyRouted="false" />
+        <AssociationConnector Association="EmailDetailsModel.FK_tbl_ex_TagHistory_TagId" ManuallyRouted="false" />
+        <AssociationConnector Association="EmailDetailsModel.FK_tbl_rev_ReviewSetInfo_ReviewTagId_Tbl_Ex_Tag" ManuallyRouted="false" />
+        <AssociationConnector Association="EmailDetailsModel.FK_tbl_rev_TagSortOrder_tbl_ex_tag" ManuallyRouted="false" />
+        <AssociationConnector Association="EmailDetailsModel.FK_tbl_tg_TagGroupAssociation_tbl_ex_tag" ManuallyRouted="false" />
+        <AssociationConnector Association="EmailDetailsModel.FK_tbl_VAR_CategoryInfo_tbl_ex_tag" ManuallyRouted="false" />
+        <AssociationConnector Association="EmailDetailsModel.FK_tbl_VAR_CategoryInfo_tbl_ex_tag1" ManuallyRouted="false" />
+        <AssociationConnector Association="EmailDetailsModel.FK_tbl_VAR_ProfileInfo_tbl_ex_tag" ManuallyRouted="false" />
+        <AssociationConnector Association="EmailDetailsModel.FK_tbl_ex_TagHistory_BatchId" ManuallyRouted="false" />
+        <AssociationConnector Association="EmailDetailsModel.FK_tbl_fd_folderHistory_tbl_fd_FolderActionLog" ManuallyRouted="false" />
+        <AssociationConnector Association="EmailDetailsModel.FK_tbl_fd_folderHistory_tbl_fd_FolderHierarchy" ManuallyRouted="false" />
+        <AssociationConnector Association="EmailDetailsModel.FK_tbl_ig_TimeOutByFiletype_tbl_ig_FileTypeTimeoutLog_TimeOutLogId" ManuallyRouted="false" />
+        <AssociationConnector Association="EmailDetailsModel.FK_tbl_ig_TimeoutJobAssociation_tbl_ig_FileTypeTimeoutLog_TimeOutLogId" ManuallyRouted="false" />
+        <AssociationConnector Association="EmailDetailsModel.FK_tbl_jb_ImportProgress_tbl_imp_ImportDetails" ManuallyRouted="false" />
+        <AssociationConnector Association="EmailDetailsModel.FK_tbl_jb_Search_tbl_sh_SearchJobExpression_SearchJobExpressionId" ManuallyRouted="false" />
+        <AssociationConnector Association="EmailDetailsModel.FK_tbl_lg_AutoCollectedFileLog_AutoCollectionLogId_tbl_lg_AutoCollectionLog" ManuallyRouted="false" />
+        <AssociationConnector Association="EmailDetailsModel.FK_tbl_lg_AutoCollectedFileLog_FileId_tbl_rev_FileInfo" ManuallyRouted="false" />
+        <AssociationConnector Association="EmailDetailsModel.FK_tbl_lg_AutoCollectionLog_ReviewSetId_tbl_rev_ReviewSetInfo" ManuallyRouted="false" />
+        <AssociationConnector Association="EmailDetailsModel.FK_tbl_rev_FileInfo_ImportLogId_tbl_lg_ImportLog" ManuallyRouted="false" />
+        <AssociationConnector Association="EmailDetailsModel.FK_tbl_pj_GroupFieldAssociation_tbl_pj_GroupInfo_GroupId" ManuallyRouted="false" />
+        <AssociationConnector Association="EmailDetailsModel.fk_tbl_pj_GroupRightAssociation_GroupId_tbl_pj_GroupInfo_GroupInfo" ManuallyRouted="false" />
+        <AssociationConnector Association="EmailDetailsModel.fk_tbl_pj_GroupUserAssociation_GroupId_tbl_pj_GroupInfo_GroupInfo" ManuallyRouted="false" />
+        <AssociationConnector Association="EmailDetailsModel.FK_tbl_qc_DocSetFileAssociation_tbl_qc_DocSet" ManuallyRouted="false" />
+        <AssociationConnector Association="EmailDetailsModel.FK_tbl_rev_BatchFileAssociation_BatchId_tbl_rev_ReviewBatch" ManuallyRouted="false" />
+        <AssociationConnector Association="EmailDetailsModel.FK_tbl_rev_BatchFileAssociation_FileId_tbl_rev_FileInfo" ManuallyRouted="false" />
+        <AssociationConnector Association="EmailDetailsModel.FK_tbl_rev_EmailAlertReceiver_ReviewSetId_tbl_rev_ReviewSetInfo" ManuallyRouted="false" />
+        <AssociationConnector Association="EmailDetailsModel.FK_tbl_rev_ReviewSet_FileId_tbl_rev_FileInfo" ManuallyRouted="false" />
+        <AssociationConnector Association="EmailDetailsModel.FK_tbl_rev_ReviewBatch_ReviewSetId_tbl_rev_ReviewSetInfo" ManuallyRouted="false" />
+        <AssociationConnector Association="EmailDetailsModel.FK_tbl_rev_ReviewerSettings_ReviewSetId_tbl_rev_ReviewSetInfo" ManuallyRouted="false" />
+        <AssociationConnector Association="EmailDetailsModel.FK_Tbl_Rev_ReviewerWorkSchedule_ReviewSetId_Tbl_rev_reviewsetinfo" ManuallyRouted="false" />
+        <AssociationConnector Association="EmailDetailsModel.FK_tbl_rev_ReviewSet_ReviewSetId_tbl_rev_ReviewSetInfo" ManuallyRouted="false" />
+        <AssociationConnector Association="EmailDetailsModel.FK__tbl_rev_U__Revie__6E2152BE" ManuallyRouted="false" />
+        <AssociationConnector Association="EmailDetailsModel.FK_ReviewSetInfo_AutoCollectRS" ManuallyRouted="false" />
+        <AssociationConnector Association="EmailDetailsModel.FK_tbl_fld_AvailableReviewField_ReviewSetId_tbl_rev_ReviewSetInfo" ManuallyRouted="false" />
+        <AssociationConnector Association="EmailDetailsModel.FK_tbl_rev_TagGroupSortOrder_tbl_rev_ReviewSetInfo" ManuallyRouted="false" />
+        <AssociationConnector Association="EmailDetailsModel.FK_tbl_rev_TagSortOrder_tbl_rev_ReviewSetInfo" ManuallyRouted="false" />
+        <AssociationConnector Association="EmailDetailsModel.FK_tbl_VAR_ProfileReviewSetAssociation_tbl_rev_ReviewSetInfo" ManuallyRouted="false" />
+        <AssociationConnector Association="EmailDetailsModel.FK_tbl_rev_TagGroupSortOrder_tbl_tg_TagGroup" ManuallyRouted="false" />
+        <AssociationConnector Association="EmailDetailsModel.FK_tbl_sh_SearchJobTerm_tbl_sh_SearchJobExpression_SearchJobExpressionId" ManuallyRouted="false" />
+        <AssociationConnector Association="EmailDetailsModel.FK_tbl_tg_TagGroupAssociation_tbl_tg_tagGroup" ManuallyRouted="false" />
+        <AssociationConnector Association="EmailDetailsModel.FK_tbl_VAR_ProfileInfo_Tbl_tg_TagGroup" ManuallyRouted="false" />
+        <AssociationConnector Association="EmailDetailsModel.FK_tbl_tg_TagRuleDetail_tbl_tg_TagRuleInfo" ManuallyRouted="false" />
+        <AssociationConnector Association="EmailDetailsModel.FK_tbl_VAR_CategoryInfo_tbl_VAR_ProfileInfo" ManuallyRouted="false" />
+        <AssociationConnector Association="EmailDetailsModel.FK_tbl_VAR_TrainingItems_tbl_VAR_CategoryInfo" ManuallyRouted="false" />
+        <AssociationConnector Association="EmailDetailsModel.FK_tbl_VAR_CategoryTrainingSources_tbl_VAR_TrainingSourceInfo" ManuallyRouted="false" />
+        <AssociationConnector Association="EmailDetailsModel.FK_tbl_VAR_TrainingItems_tbl_VAR_CategoryTrainingSources" ManuallyRouted="false" />
+        <AssociationConnector Association="EmailDetailsModel.FK_tbl_VAR_DF_Files_tbl_VAR_ProfileInfo" ManuallyRouted="false" />
+        <AssociationConnector Association="EmailDetailsModel.FK_tbl_VAR_JobInitiatedStatus_tbl_VAR_ProfileInfo" ManuallyRouted="false" />
+        <AssociationConnector Association="EmailDetailsModel.FK_tbl_VAR_Model_Files_tbl_VAR_ProfileInfo" ManuallyRouted="false" />
+        <AssociationConnector Association="EmailDetailsModel.FK_tbl_VAR_PredictionResult_tbl_VAR_ProfileInfo" ManuallyRouted="false" />
+        <AssociationConnector Association="EmailDetailsModel.FK_tbl_VAR_Problem_Files_tbl_VAR_ProfileInfo" ManuallyRouted="false" />
+        <AssociationConnector Association="EmailDetailsModel.FK_tbl_VAR_ProfileReviewSetAssociation_tbl_VAR_ProfileInfo" ManuallyRouted="false" />
+        <AssociationConnector Association="EmailDetailsModel.FK_tbl_VAR_ProfileReviewSetLog_tbl_VAR_ProfileInfo" ManuallyRouted="false" />
+        <AssociationConnector Association="EmailDetailsModel.FK_tbl_VAR_TF_Files_tbl_VAR_ProfileInfo" ManuallyRouted="false" />
+        <AssociationConnector Association="EmailDetailsModel.FK_tbl_VAR_ProfileReviewSetAssociation_tbl_VAR_ReviewSetTypeInfo" ManuallyRouted="false" />
+        <AssociationConnector Association="EmailDetailsModel.FK_tbl_VAR_RejectedTrainingItems_tbl_VAR_TF_shadow" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

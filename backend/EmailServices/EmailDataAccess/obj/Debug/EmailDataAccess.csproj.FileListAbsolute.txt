@@ -1,0 +1,12 @@
+C:\Users\Swopnil Shrestha\projects\directed-people-graph\backend\EmailServices\EmailDataAccess\bin\Debug\EmailDataAccess.dll.config
+C:\Users\Swopnil Shrestha\projects\directed-people-graph\backend\EmailServices\EmailDataAccess\bin\Debug\EmailDataAccess.dll
+C:\Users\Swopnil Shrestha\projects\directed-people-graph\backend\EmailServices\EmailDataAccess\bin\Debug\EmailDataAccess.pdb
+C:\Users\Swopnil Shrestha\projects\directed-people-graph\backend\EmailServices\EmailDataAccess\bin\Debug\EntityFramework.dll
+C:\Users\Swopnil Shrestha\projects\directed-people-graph\backend\EmailServices\EmailDataAccess\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Swopnil Shrestha\projects\directed-people-graph\backend\EmailServices\EmailDataAccess\bin\Debug\EntityFramework.xml
+C:\Users\Swopnil Shrestha\projects\directed-people-graph\backend\EmailServices\EmailDataAccess\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Swopnil Shrestha\projects\directed-people-graph\backend\EmailServices\EmailDataAccess\obj\Debug\EmailDataAccess.csprojAssemblyReference.cache
+C:\Users\Swopnil Shrestha\projects\directed-people-graph\backend\EmailServices\EmailDataAccess\obj\Debug\EmailDataAccess.csproj.CoreCompileInputs.cache
+C:\Users\Swopnil Shrestha\projects\directed-people-graph\backend\EmailServices\EmailDataAccess\obj\Debug\EmailDataAccess.csproj.CopyComplete
+C:\Users\Swopnil Shrestha\projects\directed-people-graph\backend\EmailServices\EmailDataAccess\obj\Debug\EmailDataAccess.dll
+C:\Users\Swopnil Shrestha\projects\directed-people-graph\backend\EmailServices\EmailDataAccess\obj\Debug\EmailDataAccess.pdb
