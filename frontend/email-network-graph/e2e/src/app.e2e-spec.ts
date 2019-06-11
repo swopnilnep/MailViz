@@ -10,7 +10,7 @@ describe('workspace-project App', () => {
 
   it('should display welcome message', () => {
     page.navigateTo();
-    expect(page.getTitleText()).toEqual('Welcome to d3-network-graph!');
+    expect(page.getTitleText()).toEqual('Welcome to email-network-graph!');
   });
 
   afterEach(async () => {

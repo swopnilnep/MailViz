@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "d3-network-graph": {
+    "email-network-graph": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,11 +13,12 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/d3-network-graph",
+            "outputPath": "dist/email-network-graph",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
+            "aot": false,
             "assets": [
               "src/favicon.ico",
               "src/assets"
@@ -57,18 +58,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "d3-network-graph:build"
+            "browserTarget": "email-network-graph:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "d3-network-graph:build:production"
+              "browserTarget": "email-network-graph:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "d3-network-graph:build"
+            "browserTarget": "email-network-graph:build"
           }
         },
         "test": {
@@ -105,15 +106,15 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "d3-network-graph:serve"
+            "devServerTarget": "email-network-graph:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "d3-network-graph:serve:production"
+              "devServerTarget": "email-network-graph:serve:production"
             }
           }
         }
       }
     }},
-  "defaultProject": "d3-network-graph"
+  "defaultProject": "email-network-graph"
 }

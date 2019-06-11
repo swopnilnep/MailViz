@@ -16,16 +16,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'd3-network-graph'`, () => {
+  it(`should have as title 'email-network-graph'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('d3-network-graph');
+    expect(app.title).toEqual('email-network-graph');
   });
 
   it('should render title in a h1 tag', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('h1').textContent).toContain('Welcome to d3-network-graph!');
+    expect(compiled.querySelector('h1').textContent).toContain('Welcome to email-network-graph!');
   });
 });
