@@ -198,6 +198,7 @@
     <Compile Include="tbl_ex_EmailAddresses.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="tbl_ex_EmailAddresses.partial.cs" />
     <Compile Include="tbl_ex_EmailAddresses_Sent.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>

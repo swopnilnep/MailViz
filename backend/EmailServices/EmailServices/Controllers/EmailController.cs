@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -23,11 +24,11 @@ namespace EmailServices.Controllers
         }
 
         // Get data by email address id
-        public tbl_ex_EmailAddresses Get(int id)
+        public IEnumerable < tbl_ex_EmailAddresses > Get(int id)
         {
             using(EmailDetailsEntities entities = new EmailDetailsEntities())
             {
-                return entities.tbl_ex_EmailAddresses.FirstOrDefault(e => e.EmailAddressID == id);
+                return entities.tbl_ex_EmailAddresses.Where(e => e.SenderID == id).ToList();
             }
         }
 

@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="6a470f448fd74b3d94eae8a0d4f76afd" Name="Diagram1">
+      <Diagram DiagramId="6a470f448fd74b3d94eae8a0d4f76afd" Name="Diagram1" ZoomLevel="46" ShowGrid="true">
         <EntityTypeShape EntityType="EmailDetailsModel.tbl_an_EmailNodes" Width="1.5" PointX="0.75" PointY="8.75" IsExpanded="true" />
         <EntityTypeShape EntityType="EmailDetailsModel.tbl_ann_AnnotationActionLog" Width="1.5" PointX="0.75" PointY="12.75" IsExpanded="true" />
         <EntityTypeShape EntityType="EmailDetailsModel.tbl_ann_AnnotationDetail" Width="1.5" PointX="12.75" PointY="8.75" IsExpanded="true" />
@@ -45,8 +45,8 @@
         <EntityTypeShape EntityType="EmailDetailsModel.tbl_ex_DuplicateCustodian" Width="1.5" PointX="32.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="EmailDetailsModel.tbl_ex_DuplicateFilePath" Width="1.5" PointX="32.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="EmailDetailsModel.tbl_ex_EdocMeta" Width="1.5" PointX="32.75" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="EmailDetailsModel.tbl_ex_EmailAddresses" Width="1.5" PointX="32.75" PointY="15.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="EmailDetailsModel.tbl_ex_emailaddresslist" Width="1.5" PointX="9.75" PointY="16" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_ex_EmailAddresses" Width="1.5" PointX="12.75" PointY="18.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_ex_emailaddresslist" Width="1.5" PointX="10.625" PointY="17.125" IsExpanded="true" />
         <EntityTypeShape EntityType="EmailDetailsModel.tbl_ex_EmailConversationId" Width="1.5" PointX="32.75" PointY="22.75" IsExpanded="true" />
         <EntityTypeShape EntityType="EmailDetailsModel.tbl_ex_EmailMeta" Width="1.5" PointX="32.75" PointY="25.75" IsExpanded="true" />
         <EntityTypeShape EntityType="EmailDetailsModel.tbl_ex_EmailNameInfo" Width="1.5" PointX="25.75" PointY="33.75" IsExpanded="true" />
@@ -61,7 +61,7 @@
         <EntityTypeShape EntityType="EmailDetailsModel.tbl_ex_FulltextFileLocation" Width="1.5" PointX="36.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="EmailDetailsModel.tbl_ex_FulltextReplacement" Width="1.5" PointX="36.75" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="EmailDetailsModel.tbl_ex_FulltextReplacementLog" Width="1.5" PointX="36.75" PointY="8.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="EmailDetailsModel.tbl_ex_GroupEmailList" Width="1.5" PointX="12" PointY="16.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_ex_GroupEmailList" Width="1.5" PointX="13.5" PointY="16.125" IsExpanded="true" />
         <EntityTypeShape EntityType="EmailDetailsModel.tbl_ex_HiddenFulltextFileLocation" Width="1.5" PointX="35.75" PointY="19.75" IsExpanded="true" />
         <EntityTypeShape EntityType="EmailDetailsModel.tbl_ex_HTMLFileLocation" Width="1.5" PointX="36.75" PointY="12.75" IsExpanded="true" />
         <EntityTypeShape EntityType="EmailDetailsModel.tbl_ex_HTMLFileParts" Width="1.5" PointX="36.75" PointY="22.75" IsExpanded="true" />
@@ -237,7 +237,7 @@
         <EntityTypeShape EntityType="EmailDetailsModel.tbl_VAR_TrainingItemLog" Width="1.5" PointX="48.75" PointY="43.75" IsExpanded="true" />
         <EntityTypeShape EntityType="EmailDetailsModel.tbl_VAR_TrainingItems" Width="1.5" PointX="18.25" PointY="30.5" IsExpanded="true" />
         <EntityTypeShape EntityType="EmailDetailsModel.tbl_VAR_TrainingLog" Width="1.5" PointX="48.75" PointY="47.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="EmailDetailsModel.tbl_VAR_TrainingSourceInfo" Width="1.5" PointX="13.75" PointY="20" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmailDetailsModel.tbl_VAR_TrainingSourceInfo" Width="1.5" PointX="14.875" PointY="18.125" IsExpanded="true" />
         <EntityTypeShape EntityType="EmailDetailsModel.tbl_VOD_ProductionSettings" Width="1.5" PointX="7.75" PointY="49.75" IsExpanded="true" />
         <EntityTypeShape EntityType="EmailDetailsModel.tbl_VODR_ServiceSubmitCustodianMediaAssociation" Width="1.5" PointX="49.75" PointY="16.75" IsExpanded="true" />
         <EntityTypeShape EntityType="EmailDetailsModel.tbl_del_deletedmedia" Width="1.5" PointX="21.75" PointY="49.75" IsExpanded="true" />

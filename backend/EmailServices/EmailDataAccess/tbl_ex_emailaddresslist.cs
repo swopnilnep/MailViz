@@ -11,7 +11,8 @@ namespace EmailDataAccess
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class tbl_ex_emailaddresslist
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -19,7 +20,7 @@ namespace EmailDataAccess
         {
             this.tbl_ex_GroupEmailList = new HashSet<tbl_ex_GroupEmailList>();
         }
-    
+        [Key]
         public long EmailAddressID { get; set; }
         public string EmailAddress { get; set; }
         public string EmailName { get; set; }
