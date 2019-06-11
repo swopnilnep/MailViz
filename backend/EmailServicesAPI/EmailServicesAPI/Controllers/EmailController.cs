@@ -27,16 +27,16 @@ namespace EmailServicesAPI.Controllers
 
                 //var result = db.EmailAddresses.Where(x => x.Id == 1);
 
-                var result = from emailAddress in db.EmailAddresses
-                             //where emailAddress.Id == 1
-                             select new
-                             {
-                                 emailAddress.Id,
-                                 emailAddress.Recipient,
-                                 emailAddress.RecepientID,
-                                 emailAddress.Sender,
-                                 emailAddress.SenderID
-                             };
+                var result = (
+                                from emailAddress in db.EmailAddresses
+                                select new
+                                {
+                                    emailAddress.Id,
+                                    emailAddress.Recipient,
+                                    emailAddress.Sender,
+                                }
+                            ).OrderBy(x => x.Id)
+                            .Take(100);
 
                 // Prepare data to be returned using Linq
                 return Ok(result);
