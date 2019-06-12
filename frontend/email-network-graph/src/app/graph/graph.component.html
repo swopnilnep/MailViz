@@ -1,3 +1,8 @@
-<p>
-  graph works!
-</p>
+<ul>
+  <li *ngFor="let email of emails">
+    <b><p>Communication #{{ email.id }}</p></b>
+    <p>Sender: {{ email.sender.emailName }}</p>
+    <p>Receiver: {{ email.recipient.emailName }}</p>
+    <p>Date: {{ email.date }}</p>
+  </li>
+</ul>

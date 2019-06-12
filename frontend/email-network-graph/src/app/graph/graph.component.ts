@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../data.service';
+import { Email } from '../models/email';
 
 @Component({
   selector: 'app-graph',
@@ -8,12 +9,12 @@ import { DataService } from '../data.service';
 })
 export class GraphComponent implements OnInit {
 
-  emails;
+  emails: Array<Email>;
   constructor(private dataService: DataService) { }
 
   ngOnInit() {
-    this.dataService.getEmails().subscribe((data) => {
-      this.emails = data; 
+    this.dataService.getAll().subscribe(data => {
+      this.emails = data;
     })
   }
 
