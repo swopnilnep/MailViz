@@ -29,8 +29,15 @@ namespace EmailServicesAPI.Models
         [ForeignKey("Recipient")]
         public long RecepientID { get; set; }
 
-        //[Key, Column("GroupDate")]
-        //public string Date { get; set; }
+        [ Column("GroupDate")]
+        public DateTime? Date { get; set; }
+
+        //[NotMapped]
+        //public string Year {  get {return Date?.Year.ToString(); } }
+        //[NotMapped]
+        //public string Month { get { return Date?.Month.ToString(); } }
+        //[NotMapped]
+        //public string Day { get { return Date?.Day.ToString(); } }
 
         public virtual EmailAddressList Sender { get; set; }
         public virtual EmailAddressList Recipient { get; set; }
