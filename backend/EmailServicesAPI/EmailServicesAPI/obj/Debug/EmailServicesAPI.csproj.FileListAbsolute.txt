@@ -134,3 +134,6 @@ C:\Users\Swopnil Shrestha\projects\email-analytics\backend\EmailServicesAPI\Emai
 C:\Users\Swopnil Shrestha\projects\email-analytics\backend\EmailServicesAPI\EmailServicesAPI\obj\Debug\EmailServicesAPI.csproj.CopyComplete
 C:\Users\Swopnil Shrestha\projects\email-analytics\backend\EmailServicesAPI\EmailServicesAPI\obj\Debug\EmailServicesAPI.dll
 C:\Users\Swopnil Shrestha\projects\email-analytics\backend\EmailServicesAPI\EmailServicesAPI\obj\Debug\EmailServicesAPI.pdb
+C:\Users\Swopnil Shrestha\projects\email-analytics\backend\EmailServicesAPI\EmailServicesAPI\bin\System.Web.Cors.dll
+C:\Users\Swopnil Shrestha\projects\email-analytics\backend\EmailServicesAPI\EmailServicesAPI\bin\System.Web.Http.Cors.dll
+C:\Users\Swopnil Shrestha\projects\email-analytics\backend\EmailServicesAPI\EmailServicesAPI\bin\System.Web.Http.Cors.xml

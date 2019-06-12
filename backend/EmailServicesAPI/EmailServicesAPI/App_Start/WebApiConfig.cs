@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json.Serialization;
 using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace EmailServicesAPI
 {
@@ -26,11 +27,29 @@ namespace EmailServicesAPI
             config.Formatters.JsonFormatter.SerializerSettings.ContractResolver = 
                 new CamelCasePropertyNamesContractResolver();
 
+            EnableCrossSiteRequests(config);
+            AddRoutes(config);
+
+        }
+
+        private static void AddRoutes(HttpConfiguration config)
+        {
+
             config.Routes.MapHttpRoute(
-                name: "DefaultApi",
-                routeTemplate: "api/v1/{controller}/{id}",
-                defaults: new { id = RouteParameter.Optional }
-            );
+            name: "DefaultApi",
+            routeTemplate: "api/v1/{controller}/{id}",
+            defaults: new { id = RouteParameter.Optional });
+
+        }
+
+        private static void EnableCrossSiteRequests(HttpConfiguration config)
+        {
+            var cors = new EnableCorsAttribute(
+                origins: "*",
+                headers: "*",
+                methods: "*");
+            config.EnableCors(cors);
         }
     }
+
 }
