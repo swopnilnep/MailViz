@@ -34,6 +34,7 @@ namespace EmailServicesAPI.Controllers
                                     emailAddress.Id,
                                     emailAddress.Recipient,
                                     emailAddress.Sender,
+                                    //emailAddress.Date
                                 }
                             ).OrderBy(x => x.Id)
                             .Take(100);

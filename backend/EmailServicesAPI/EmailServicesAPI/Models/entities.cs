@@ -29,6 +29,9 @@ namespace EmailServicesAPI.Models
         [ForeignKey("Recipient")]
         public long RecepientID { get; set; }
 
+        //[Key, Column("GroupDate")]
+        //public string Date { get; set; }
+
         public virtual EmailAddressList Sender { get; set; }
         public virtual EmailAddressList Recipient { get; set; }
     }
