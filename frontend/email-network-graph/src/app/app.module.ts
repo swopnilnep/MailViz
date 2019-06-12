@@ -4,6 +4,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { GraphComponent } from './graph/graph.component';
+import { DataService } from './data.service';
 
 @NgModule({
   declarations: [

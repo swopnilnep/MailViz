@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DataService } from '../data.service';
 
 @Component({
   selector: 'app-graph',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GraphComponent implements OnInit {
 
-  constructor() { }
+  emails;
+  constructor(private dataService: DataService) { }
 
   ngOnInit() {
+    this.dataService.getEmails().subscribe((data) => {
+      this.emails = data; 
+    })
   }
 
 }
