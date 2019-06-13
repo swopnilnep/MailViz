@@ -40,4 +40,30 @@ namespace EmailServicesAPI.Controllers
         }
 
     }
+
+    public class CommunicationController : ApiController
+    {
+        private VenContext db = new VenContext(
+            System.Configuration
+            .ConfigurationManager
+            .ConnectionStrings["EmailDetailsEntities"].ConnectionString
+            );
+
+        [HttpGet]
+        public IHttpActionResult Get()
+        {
+            try
+            {
+
+                var result = "TestString";
+                return Ok(result);
+            }
+            catch (Exception e)
+            {
+                return InternalServerError();
+            }
+        }
+
+    }
+
 }
