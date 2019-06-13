@@ -20,17 +20,20 @@ namespace EmailServicesAPI.Models
         [Key, Column("EmailAddressID")]
         public long Id { get; set; }
 
+        [Column("FileID")]
+        public long FileID { get; set; }
+
         [ForeignKey("Sender")]
         public long SenderID { get; set; }
+        public virtual EmailAddressList Sender { get; set; }
 
         [ForeignKey("Recipient")]
         public long RecepientID { get; set; }
+        public virtual EmailAddressList Recipient { get; set; }
 
         [ Column("GroupDate")]
         public DateTime? Date { get; set; }
 
-        public virtual EmailAddressList Sender { get; set; }
-        public virtual EmailAddressList Recipient { get; set; }
     }
 
 }
