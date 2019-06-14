@@ -1,10 +1,16 @@
 <div id="network"></div>
 
 <!-- <ul>
-  <li *ngFor="let email of emails">
-    <b><p>Communication #{{ email.id }}</p></b>
-    <p>Sender: {{ email.sender.emailName }}</p>
-    <p>Receiver: {{ email.recipient.emailName }}</p>
-    <p>Date: {{ email.date | date:'MM/dd/yyyy' }}</p>
+  <li *ngFor="let person of people">
+    <p>Person #{{ person.id }}</p>
+    <p>Name: {{ person.emailName }}</p>
+  </li>
+</ul>
+
+<ul>
+  <li *ngFor="let interaction of interactions">
+    <p>Sender: {{ interaction.senderID }}</p>
+    <p>Receiver: {{ interaction.recepientID }}</p>
+    <p>Emails Sent: {{ interaction.emailsSent }}</p>
   </li>
 </ul> -->

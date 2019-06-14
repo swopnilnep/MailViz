@@ -1,61 +1,150 @@
 import { Component, OnInit } from '@angular/core';
-import { DataService } from '../../data.service';
-import { Email } from '../../models/email';
-import * as vis from 'vis';
-import { generate } from 'rxjs';
+import { DataService } from '../../services/data.service';
+import { Interaction } from '../../models/interaction';
+import { Person } from '../../models/person';
+
+// Vis Classes
+import * as Vis from 'vis';
+import { VisEdge } from 'src/app/models/vis';
+import { VisNode } from 'src/app/models/vis';
 
 @Component({
   selector: 'app-graph',
   templateUrl: './graph.component.html',
   styleUrls: ['./graph.component.css']
 })
+
 export class GraphComponent implements OnInit {
 
-  emails: Array<Email>;
+  interactions: Array<Interaction>;
+  people: Array<Person>;
   constructor(private dataService: DataService) { }
 
   ngOnInit() {
-    
-    this.dataService.getAll().subscribe(data => {
-      this.emails = data;
+
+    // Retrieve Data From the API with the dataService
+    this.dataService.getInteractions().subscribe(data => {
+      this.interactions = data;
+
+      // Repeated in both data getter functions
+      // Because whichever comes last will
+      // Run the 'generateNetworkGraph'
+      if (this.people && this.interactions){
+        this.generateNetworkGraph();
+      }
+
     })
+    
+    this.dataService.getPeople().subscribe(data => {
+      this.people = data;
 
-    this.generateNetworkGraph();
+      if (this.people && this.interactions){
+        this.generateNetworkGraph();
+      }
 
+    })
   }
 
   // Places a Network Graph on the HTML DOM Element
   generateNetworkGraph() {
 
-    // Create an array of nodes
-    var nodes = new vis.DataSet([
-      {id: 1, label: 'Node 1'},
-      {id: 2, label: 'Node 2'},
-      {id: 3, label: 'Node 3'},
-      {id: 4, label: 'Node 4'},
-      {id: 5, label: 'Node 5'}
-    ]);
-  
-    // Create an array with edges
-    var edges = new vis.DataSet([
-      { from: 1, to: 3},
-      { from: 1, to: 2},
-      { from: 2, to: 4},
-      { from: 2, to: 5},
-    ])
-  
+
+    console.log("Creating node array..");
+
+    // Create an array of Nodes
+    let arrayOfNodes : Array<VisNode> = [];
+    this.people.forEach(person =>
+        arrayOfNodes.push(new VisNode(person))
+    );
+
+    console.log("Creating node dataset..");
+
+    let nodes = new Vis.DataSet(arrayOfNodes);
+
+    console.log("Creating edge array..");
+
+    // Create an array of edges
+    let arrayOfEdges : Array<VisEdge> = [];
+    this.interactions.forEach(itr =>
+        arrayOfEdges.push(new VisEdge(itr))
+      );
+
+    console.log("Creating edge dataset..")
+
+    let edges = new Vis.DataSet(arrayOfEdges);
+
     // Set the vis data
-    var data = {
+    let data = {
       nodes: nodes,
       edges: edges
     };
   
-    var options = {};
+    let options = {
+      groups: {
+          failure: {
+              color: {
+                  background: 'red'
+              }
+          },
+          state: {
+              color: {
+                  background: 'lime'
+              }
+          },
+          startstate: {
+              font: {
+                  size: 33,
+                  color: 'white'
+              },
+              color: {
+                  background: 'blueviolet'
+              }
+          },
+          finalstate: {
+              font: {
+                  size: 33,
+                  color: 'white'
+              },
+              color: {
+                  background: 'blue'
+              }
+          }
+      },
+      edges: {
+          arrows: {
+              to: {
+                  enabled: true
+              }
+          },
+          smooth: {
+              enabled: false,
+              type: 'continuous'
+          }
+      },
+      physics: {
+          adaptiveTimestep: true,
+          barnesHut: {
+              // gravitationalConstant: -8000,
+              springConstant: 0.04,
+              springLength: 95
+          },
+          stabilization: {
+              iterations: 987
+          }
+      },
+      layout: {
+          randomSeed: 191006,
+          improvedLayout: false
+      }
+  };
   
+    console.log("Creating vis Network");
+
     // Set the vis container
-    var container = document.getElementById('network');
-  
-    new vis.Network(container, data, options);
+    let container = document.getElementById('network');
+    new Vis.Network(container, data, options);
+
+    console.log("Generated Graph")
 
   }
 
