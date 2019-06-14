@@ -56,14 +56,31 @@ namespace EmailServicesAPI.Controllers
 
     }
 
-    public class CommunicationController : ApiController
+    public class PeopleController : ApiController
     {
+
+        private VenContext db = new VenContext(
+            System.Configuration
+            .ConfigurationManager
+            .ConnectionStrings["EmailDetailsEntities"].ConnectionString
+            );
+
         [HttpGet]
         public IHttpActionResult Get()
         {
             try
             {
-                return Ok();
+
+                var results = (
+                    from people in db.EmailAddressList
+                          select new
+                              {
+                                  people.Id,
+                                  people.EmailName
+                              }
+                              ).ToList();
+
+                return Ok(results);
             }
             catch (Exception e)
             {
