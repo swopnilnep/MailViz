@@ -20,7 +20,7 @@ export class VisNode {
     // Ctors
     constructor(person: Person){
         this.setId(person.id);
-        this.setLabel(person.emailName);
+        this.setLabel(person.id.toString());
     }
 
 }
