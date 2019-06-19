@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Interaction } from '../models/interaction';
-import { Person } from '../models/person';
+import { PersonMap } from '../models/person';
 
 @Injectable({
   providedIn: 'root'
@@ -36,8 +36,8 @@ export class DataService {
   }
 
   // Get all persons
-  getPeople(): Observable<string> {
-    return this.httpClient.get<string>
+  getPeople(): Observable<PersonMap> {
+    return this.httpClient.get<any>
     (`${this.API_URL}/${this.API_VERSION}/${this.API_PEOPLE_CONTROLLER}/`);
   }
 

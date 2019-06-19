@@ -1,3 +1,8 @@
-<div id="network"></div>
+<!-- <div id="network"></div> -->
 
-{{ this.people }}
+<ul>
+    <li *ngFor="let person of propleArray">
+        {{ person.emailName }}
+        {{ person.emailAddress }}
+    </li>
+</ul>
