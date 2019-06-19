@@ -7,3 +7,5 @@ SELECT SenderID, RecepientID, COUNT(DISTINCT FileID) as EmailsSent
     WHERE SenderID != @noName AND RecepientID != @noName
     GROUP BY SenderID, RecepientID
     ORDER BY EmailsSent DESC;
+
+Select @noName;

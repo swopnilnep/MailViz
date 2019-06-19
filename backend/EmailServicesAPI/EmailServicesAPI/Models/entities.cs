@@ -12,6 +12,7 @@ namespace EmailServicesAPI.Models
         public long Id { get; set; }
         public string EmailAddress { get; set; }
         public string EmailName { get; set; }
+        public string DomainName { get; set; }
     }
 
     [Table("tbl_ex_EmailAddresses")]
