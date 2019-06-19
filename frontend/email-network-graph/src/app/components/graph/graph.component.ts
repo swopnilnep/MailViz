@@ -18,7 +18,7 @@ import { VisNetworkOptions } from './options';
 export class GraphComponent implements OnInit {
 
   interactions: Array<Interaction>;
-  people: Array<Person>;
+  people = new Map<number, Person>();
   constructor(private dataService: DataService) { }
 
   ngOnInit() {
@@ -30,9 +30,9 @@ export class GraphComponent implements OnInit {
       // Repeated in both data getter functions
       // Because whichever comes last will
       // Run the 'generateNetworkGraph'
-      if (this.people && this.interactions){
-        this.generateNetworkGraph();
-      }
+      // if (this.people && this.interactions){
+      //   // this.generateNetworkGraph();
+      // }
 
     })
     
@@ -40,56 +40,57 @@ export class GraphComponent implements OnInit {
       this.people = data;
 
       if (this.people && this.interactions){
-        this.generateNetworkGraph();
+        
+        // this.generateNetworkGraph();
       }
 
     })
   }
 
-  // Places a Network Graph on the HTML DOM Element
-  generateNetworkGraph() {
+  // // Places a Network Graph on the HTML DOM Element
+  // generateNetworkGraph() {
     
-    // Declare a set to make sure that
-    // None of the nodes are repeated during
-    // node dataset creation
-    let myPeopleIds = new Set();
+  //   // Declare a set to make sure that
+  //   // None of the nodes are repeated during
+  //   // node dataset creation
+  //   let myPeopleIds = new Set();
 
-    // Set the network Edges
-    let arrayOfEdges : Array<VisEdge> = [];
-    this.interactions.forEach(itr => {
-        arrayOfEdges.push(new VisEdge(itr));
-        myPeopleIds.add(itr.senderID);
-        myPeopleIds.add(itr.recepientID);
-      }
-    );
-    let edges = new Vis.DataSet(arrayOfEdges);
+  //   // Set the network Edges
+  //   let arrayOfEdges : Array<VisEdge> = [];
+  //   this.interactions.forEach(itr => {
+  //       arrayOfEdges.push(new VisEdge(itr));
+  //       myPeopleIds.add(itr.senderID);
+  //       myPeopleIds.add(itr.recepientID);
+  //     }
+  //   );
+  //   let edges = new Vis.DataSet(arrayOfEdges);
 
-    // Set the network Nodes
-    let arrayOfNodes : Array<VisNode> = [];
-    myPeopleIds.forEach(id => {
-        let index = Number(id)-1;
-        arrayOfNodes.push(
-          new VisNode(this.people[index])
-        );
-      }
-    );
-    let nodes = new Vis.DataSet(arrayOfNodes);
+  //   // Set the network Nodes
+  //   let arrayOfNodes : Array<VisNode> = [];
+  //   myPeopleIds.forEach(id => {
+  //       let index = Number(id)-1;
+  //       arrayOfNodes.push(
+  //         new VisNode(this.people[index])
+  //       );
+  //     }
+  //   );
+  //   let nodes = new Vis.DataSet(arrayOfNodes);
     
-    // Set the network data
-    let data = {
-      nodes: nodes,
-      edges: edges
-    };
+  //   // Set the network data
+  //   let data = {
+  //     nodes: nodes,
+  //     edges: edges
+  //   };
 
-    // Set the network options
-    let options = new VisNetworkOptions();
-    // let options = {};
+  //   // Set the network options
+  //   let options = new VisNetworkOptions();
+  //   // let options = {};
 
-    // Set the network container
-    let container = document.getElementById('network');
+  //   // Set the network container
+  //   let container = document.getElementById('network');
 
-    // Generate network Graph
-    new Vis.Network(container, data, options);
-  }
+  //   // Generate network Graph
+  //   new Vis.Network(container, data, options);
+  // }
 
 }

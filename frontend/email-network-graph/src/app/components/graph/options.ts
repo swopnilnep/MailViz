@@ -2,12 +2,12 @@ export class VisNetworkOptions {
     physics = {
         // enabled: true,
         barnesHut: {
-          gravitationalConstant: -2000,
-          centralGravity: 0.3,
+          gravitationalConstant: -8250,
+          centralGravity: 2,
           springLength: 95,
-          springConstant: 0.04,
-          damping: 0.09,
-          avoidOverlap: 0
+          springConstant: 0.005,
+          damping: 0.5,
+          avoidOverlap: 0.08
         },
         // forceAtlas2Based: {
         //   gravitationalConstant: -50,

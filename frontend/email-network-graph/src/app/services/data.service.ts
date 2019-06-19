@@ -9,14 +9,15 @@ import { Person } from '../models/person';
 })
 
 export class DataService {
-  public API_URL = 'http://localhost:51750/api';
-  public API_VERSION = 'v1';
-  public API_INTERACTIONS_CONTROLLER = 'Time';
-  public API_PEOPLE_CONTROLLER = 'People';
+  // API Configuration
+  private API_URL = 'http://localhost:51750/api';
+  private API_VERSION = 'v1';
+  private API_INTERACTIONS_CONTROLLER = 'Time';
+  private API_PEOPLE_CONTROLLER = 'People';
   
   // Parameters
-  public START_DATE = '2001-05-06';
-  public END_DATE = '2001-05-09';
+  startDate = '2001-05-06';
+  endDate = '2001-05-09';
 
   constructor(private httpClient: HttpClient) { }
 
@@ -25,9 +26,9 @@ export class DataService {
     let q = `${this.API_URL}/${this.API_VERSION}/` +
       `${this.API_INTERACTIONS_CONTROLLER}`
 
-    if (this.START_DATE && this.END_DATE){
+    if (this.startDate && this.endDate){
       q += '?';
-      q += `start=${this.START_DATE}&end=${this.END_DATE}`;
+      q += `start=${this.startDate}&end=${this.endDate}`;
     }
 
     return this.httpClient.get<Array<Interaction>>
@@ -35,8 +36,8 @@ export class DataService {
   }
 
   // Get all persons
-  getPeople(): Observable<Array<Person>> {
-    return this.httpClient.get<Array<Person>>
+  getPeople(): Observable<string> {
+    return this.httpClient.get<string>
     (`${this.API_URL}/${this.API_VERSION}/${this.API_PEOPLE_CONTROLLER}/`);
   }
 
