@@ -120,16 +120,36 @@ namespace EmailServicesAPI.Controllers
 
             // Join the above two tables
             // and add a column TotalEmails
+            //var tbl_usr_counts = (
+            //        from er in tbl_emails_received
+            //        join es in tbl_emails_sent
+            //        on er.RecepientID equals es.SenderID
+            //        select new
+            //        {
+            //            Id = er.RecepientID,
+            //            er.EmailsRecieved,
+            //            es.EmailsSent,
+            //            TotalEmails = er.EmailsRecieved + es.EmailsSent,
+            //        }
+            //    );
+
             var tbl_usr_counts = (
-                    from er in tbl_emails_received
-                    join es in tbl_emails_sent
-                    on er.RecepientID equals es.SenderID
-                    select new
-                    {
-                        Id = er.RecepientID,
-                        //er.EmailsRecieved,
-                        //es.EmailsSent,
-                        TotalEmails = er.EmailsRecieved + es.EmailsSent,
+                    from email in emailAddresses
+                    join sent in tbl_emails_sent
+                    on email.Id equals sent.SenderID
+                into s
+                    from sent in s.DefaultIfEmpty()
+                    join received in tbl_emails_received
+                    on email.Id equals received.RecepientID
+                into r
+                    from received in r.DefaultIfEmpty()
+                    select new {
+                        email.Id,
+
+                        EmailsSent = 
+                            ( sent == null )? 0 : sent.EmailsSent,
+                        EmailsReceived = 
+                            ( received == null)? 0 : received.EmailsRecieved,
                     }
                 );
 
@@ -142,10 +162,14 @@ namespace EmailServicesAPI.Controllers
                     select new
                     {
                         personName.Id,
-                        personCounts.TotalEmails,
+                        //TotalEmails = 
+                        //    personCounts.EmailsSent + personCounts.EmailsReceived,
+                        personCounts.EmailsSent,
+                        personCounts.EmailsReceived,
                         personName.EmailAddress,
                         personName.EmailName,
-                        personName.DomainName
+                        personName.DomainName,
+                        
                     }
                 );
 

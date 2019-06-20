@@ -1,4 +1,4 @@
-iWITH 
+WITH 
 tbl_emails_received AS
     (
         SELECT RecepientID, count(FileID) AS EmailsRecieved 
@@ -20,6 +20,5 @@ FROM tbl_emails_received r
         ON r.RecepientID = s.SenderID
     JOIN tbl_ex_emailaddresslist slist
         ON slist.EmailAddressID = s.SenderID
-ORDER BY TotalEmails DESC
+ORDER BY Id ASC
 ;
-    
