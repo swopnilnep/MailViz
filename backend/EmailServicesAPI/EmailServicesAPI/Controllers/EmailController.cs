@@ -232,9 +232,9 @@ namespace EmailServicesAPI.Controllers
                        {
                            tbl.Key.SenderID,
                            tbl.Key.RecepientID,
-                           EmailsSent = tbl.Count()
+                           EmailCount = tbl.Count()
                        }
-                    ).OrderByDescending(tbl => tbl.EmailsSent);
+                    );
 
                 return Ok(query);
             }
