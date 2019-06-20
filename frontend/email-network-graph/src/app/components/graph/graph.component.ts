@@ -19,13 +19,19 @@ export class GraphComponent implements OnInit {
 
   interactions: Array<Interaction>;
   people : PersonMap;
+  network: Vis.Network;
+
   constructor(private dataService: DataService) {}
 
   ngOnInit() {
 
     // Retrieve Data From the API with the dataService
     this.dataService.getInteractions().subscribe(data => {
-      this.interactions = data;
+
+      this.interactions = new Array<Interactions>();
+      data.forEach(element => {
+        this.interactions.push(new Interaction(element));  
+      });
 
       // Repeated in both data getter functions
       // Because whichever comes last will
@@ -64,6 +70,10 @@ export class GraphComponent implements OnInit {
     let arrayOfEdges : Array<VisEdge> = [];
     this.interactions.forEach(itr => {
         arrayOfEdges.push(new VisEdge(itr));
+
+        // Add the People to the set
+        // of people Ids to later make
+        // 'Person' objects out of them
         myPeopleIds.add(itr.senderID);
         myPeopleIds.add(itr.recepientID);
       }
@@ -76,7 +86,7 @@ export class GraphComponent implements OnInit {
     myPeopleIds.forEach(id => {
         arrayOfNodes.push(
           new VisNode(this.people.get(id))
-        );
+          );
       }
     );
 
@@ -92,10 +102,27 @@ export class GraphComponent implements OnInit {
     let options = new VisNetworkOptions();
 
     // Set the network container
-    let container = document.getElementById('network');
+    let container = 
+      document.getElementById('network');
 
     // Generate network Graph
-    new Vis.Network(container, data, options);
+    this.network = new Vis.Network(
+      container, data, options
+      );
+
+    this.network.on('stabilizationProgress', function(params) {
+      document.getElementById('indicator').innerHTML = 
+        Math.round((params.iterations/params.total)*100) + '%';
+    });
+
+    this.network.once('stabilizationIterationsDone', function() {
+      document.getElementById('spinner').style.display = 'none';
+    });
+
+    this.network.on('hovernode', function() {
+      changeCursor('grab');
+    })
+
   }
 
 }

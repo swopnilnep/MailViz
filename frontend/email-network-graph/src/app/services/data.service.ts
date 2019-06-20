@@ -17,11 +17,11 @@ export class DataService {
   
   // Parameters
   startDate = '2001-05-06';
-  endDate = '2001-05-09';
+  endDate = '2002-05-09';
 
   constructor(private httpClient: HttpClient) { }
 
-  // Get all interactiona
+  // Get all interaction6
   getInteractions(): Observable<Array<Interaction>> {
     let q = `${this.API_URL}/${this.API_VERSION}/` +
       `${this.API_INTERACTIONS_CONTROLLER}`

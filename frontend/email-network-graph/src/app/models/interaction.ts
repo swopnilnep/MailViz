@@ -1,6 +1,11 @@
 export class Interaction {
-    id: number;
     senderID: number;
     recepientID: number;
-    // date: Date;
+    emailCount: number;
+
+    constructor(d : any) {
+        this.senderID = d.senderID;
+        this.recepientID = d.recepientID;
+        this.emailCount = d.emailCount;
+    }
 }

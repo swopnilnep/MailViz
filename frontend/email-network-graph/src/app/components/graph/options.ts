@@ -3,7 +3,7 @@ export class VisNetworkOptions {
         // enabled: true,
         barnesHut: {
           gravitationalConstant: -8250,
-          centralGravity: 2,
+          centralGravity: 0.3,
           springLength: 95,
           springConstant: 0.005,
           damping: 0.5,
@@ -51,16 +51,16 @@ export class VisNetworkOptions {
     //     hideEdgesOnDrag: false,
     //     hideNodesOnDrag: false,
         hover: true,
-    //     hoverConnectedEdges: true,
+        hoverConnectedEdges: false,
     //     keyboard: {
     //         enabled: false,
     //         speed: {x: 10, y: 10, zoom: 0.02},
     //         bindToWindow: true
     //     },
-        multiselect: false,
-        // navigationButtons: true,
-    //     selectable: true,
-    //     selectConnectedEdges: true,
+        multiselect: true,
+        // navigationButtons: false,
+        // selectable: true,
+        // selectConnectedEdges: true,
     //     tooltipDelay: 300,
     //     zoomView: true
     };
@@ -86,11 +86,11 @@ export class VisNetworkOptions {
         //   x:false,
         //   y:false
         // },
-        // // font: {
-        //   color: '#343434',
+        font: {
+          color: 'black',
         //   size: 14, // px
         //   face: 'arial',
-        //   background: 'none',
+          background: 'white',
         //   strokeWidth: 0, // px
         //   strokeColor: '#ffffff',
         //   align: 'center',
@@ -124,7 +124,7 @@ export class VisNetworkOptions {
         //     vadjust: 2,
         //     mod: ''
         //   }
-        // },
+        },
         // group: undefined,
         // heightConstraint: false,
         // hidden: false,
@@ -141,26 +141,26 @@ export class VisNetworkOptions {
         // mass: 1,
         // physics: true,
         scaling: {
-          min: 5,
-          max: 30,
+          min: 8,
+          max: 15,
           label: {
-            enabled: true,
-            min: 14,
-            max: 30,
-            maxVisible: 30,
-            drawThreshold: 5
+            // enabled: true,
+            min: 10,
+            max: 20,
+            // maxVisible: 30,
+            // drawThreshold: 5
           },
-          customScalingFunction: function (min,max,total,value) {
-            if (max === min) {
-              return 0.5;
-            }
-            else {
-              let scale = 1 / (max - min);
-              return Math.max(0,(value - min)*scale);
-            }
-          }
+        //   customScalingFunction: function (min,max,total,value) {
+        //     if (max === min) {
+        //       return 0.5;
+        //     }
+        //     else {
+        //       let scale = 1 / (max - min);
+        //       return Math.max(0,(value - min)*scale);
+        //     }
+        //   }
         },
-        shape: 'circle',
+        shape: 'dot',
         // shapeProperties: {
         //   borderDashes: false, // only for borders
         //   borderRadius: 6,     // only for box shape
@@ -168,7 +168,7 @@ export class VisNetworkOptions {
         //   useImageSize: false,  // only for image and circularImage shapes
         //   useBorderWithImage: false  // only for image shape
         // }
-        // size: 25,
+        // size: 25, // Note: This is ignored when the scaling function is enabled
         // title: "Test",
         // value: 50,
         // widthConstraint: false,
@@ -182,21 +182,21 @@ export class VisNetworkOptions {
           // middle: {enabled: true, scaleFactor:1, type:'arrow'},
           from:   {enabled: true, scaleFactor:1, type:'arrow'}
         },
-        arrowStrikethrough: false,
+        arrowStrikethrough: true,
         // chosen: true,
         color: {
-          color:'#848484',
-          highlight:'#848484',
-          hover: '#848484',
+          color:'lightblue',
+          highlight:'orange',
+          hover: 'gold',
           inherit: 'from',
           opacity:0.8
         },
         // dashes: false,
         // font: {
-        //   color: '#343434',
+          // color: 'black',
         //   size: 14, // px
         //   face: 'arial',
-        //   background: 'none',
+          // background: 'white',
         //   strokeWidth: 2, // px
         //   strokeColor: '#ffffff',
         //   align: 'horizontal',
@@ -232,7 +232,7 @@ export class VisNetworkOptions {
         //   }
         // },
         // hidden: false,
-        // hoverWidth: 1.5,
+        hoverWidth: 1.5,
         // label: undefined,
         // labelHighlightBold: true,
         // length: undefined,
