@@ -50,15 +50,15 @@ export class VisNetworkOptions {
     //     dragView: true,
     //     hideEdgesOnDrag: false,
     //     hideNodesOnDrag: false,
-    //     hover: false,
+        hover: true,
     //     hoverConnectedEdges: true,
     //     keyboard: {
     //         enabled: false,
     //         speed: {x: 10, y: 10, zoom: 0.02},
     //         bindToWindow: true
     //     },
-    //     multiselect: false,
-    //     navigationButtons: false,
+        multiselect: false,
+        // navigationButtons: true,
     //     selectable: true,
     //     selectConnectedEdges: true,
     //     tooltipDelay: 300,
@@ -140,26 +140,26 @@ export class VisNetworkOptions {
         // level: undefined,
         // mass: 1,
         // physics: true,
-        // scaling: {
-        //   min: 10,
-        //   max: 30,
-        //   label: {
-        //     enabled: false,
-        //     min: 14,
-        //     max: 30,
-        //     maxVisible: 30,
-        //     drawThreshold: 5
-        //   },
-        //   customScalingFunction: function (min,max,total,value) {
-        //     if (max === min) {
-        //       return 0.5;
-        //     }
-        //     else {
-        //       let scale = 1 / (max - min);
-        //       return Math.max(0,(value - min)*scale);
-        //     }
-        //   }
-        // },
+        scaling: {
+          min: 5,
+          max: 30,
+          label: {
+            enabled: true,
+            min: 14,
+            max: 30,
+            maxVisible: 30,
+            drawThreshold: 5
+          },
+          customScalingFunction: function (min,max,total,value) {
+            if (max === min) {
+              return 0.5;
+            }
+            else {
+              let scale = 1 / (max - min);
+              return Math.max(0,(value - min)*scale);
+            }
+          }
+        },
         shape: 'circle',
         // shapeProperties: {
         //   borderDashes: false, // only for borders
@@ -169,28 +169,28 @@ export class VisNetworkOptions {
         //   useBorderWithImage: false  // only for image shape
         // }
         // size: 25,
-        // title: undefined,
-        // value: undefined,
+        // title: "Test",
+        // value: 50,
         // widthConstraint: false,
         // x: undefined,
         // y: undefined
     };
       
     edges = {
-        // arrows: {
-        //   to:     {enabled: true, scaleFactor:1, type:'arrow'},
-        // //   middle: {enabled: false, scaleFactor:1, type:'arrow'},
-        //   from:   {enabled: true, scaleFactor:1, type:'arrow'}
-        // },
-        // arrowStrikethrough: false,
+        arrows: {
+          to:     {enabled: true, scaleFactor:1, type:'arrow'},
+          // middle: {enabled: true, scaleFactor:1, type:'arrow'},
+          from:   {enabled: true, scaleFactor:1, type:'arrow'}
+        },
+        arrowStrikethrough: false,
         // chosen: true,
-        // color: {
-        //   color:'#848484',
-        //   highlight:'#848484',
-        //   hover: '#848484',
-        //   inherit: 'from',
-        //   opacity:0.8
-        // },
+        color: {
+          color:'#848484',
+          highlight:'#848484',
+          hover: '#848484',
+          inherit: 'from',
+          opacity:0.8
+        },
         // dashes: false,
         // font: {
         //   color: '#343434',

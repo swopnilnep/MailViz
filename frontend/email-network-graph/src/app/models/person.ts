@@ -3,12 +3,19 @@ export class Person {
     emailName: string;
     emailAddress: string;
     domainName: string;
-    totalEmails: number;    
+    totalEmails: number;
+    emailsReceived: number;
+    emailsSent: number;   
 
     constructor(d : any) {
         this.id = d.id;
         this.emailName = d.emailName;
         this.emailAddress = d.emailAddress;
+        // The emails 'received' is spelled
+        // differently from the one from the API
+        // which spells it as 'recieved'
+        this.emailsReceived = d.emailsReceived;
+        this.emailsSent = d.emailsSent;
         this.domainName = d.domainName;
         this.totalEmails = d.totalEmails;
     }
@@ -16,6 +23,10 @@ export class Person {
 
 export class PersonMap extends Map<number, Person> {
     
+    public constructor() {
+        super();
+    }
+
     get(id : number) : Person {
         // Returns the 'Person' object matching
         // the id passed as a parameter
