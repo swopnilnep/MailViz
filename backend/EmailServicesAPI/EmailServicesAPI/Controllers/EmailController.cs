@@ -5,95 +5,46 @@ using static EmailServicesAPI.Context.DatabaseContext;
 
 namespace EmailServicesAPI.Controllers
 {
-    public class EmailController : ApiController
-    {
-        private VenContext db = 
-            VenioWebApiHelper.getDatabaseContext();
-
-        [HttpGet]
-        public IHttpActionResult Get()
-        {
-            try
-            {
-                // Selects the ID that does not have a name or an email
-                // address and stores it as an integer (64Bit Signed)
-                long unknownsID = Convert.ToInt64((
-                        from ead in db.EmailAddressList
-                        where ead.EmailName == "[NO_NAME]"
-                        && ead.EmailAddress == "[NO_ADDRESS]"
-                        select ead.Id
-                    ).ToList().ElementAt(0));
-
-                var query = db.EmailAddresses
-                    .Select(x =>
-                       new
-                       {
-                           x.SenderID,
-                           x.RecepientID,
-                       }
-                    )
-                    .Where(d => d.RecepientID != unknownsID && d.SenderID != unknownsID)
-                    .GroupBy(s => new { s.SenderID, s.RecepientID })
-                    .Select(g =>
-                       new
-                       {
-                           g.Key.SenderID,
-                           g.Key.RecepientID,
-                           EmailsSent = g.Count()
-                       }
-                    ).OrderByDescending(g => g.EmailsSent);
-
-                return Ok(query);
-            }
-            catch (Exception e)
-            {
-                return InternalServerError();
-            }
-        }
-
-    }
-
-    //public class PeopleController : ApiController
-    //{
-
-    //    private VenContext db =
-    //         VenioWebApiHelper.getDatabaseContext();
-
-    //    [HttpGet]
-    //    public IHttpActionResult Get()
-    //    {
-    //        try
-    //        {
-
-    //            var results = (
-    //                from people in db.EmailAddressList
-    //                select new
-    //                {
-    //                    people.Id,
-    //                    people.EmailName
-    //                }
-    //                          ).ToList();
-
-    //            return Ok(results);
-    //        }
-    //        catch (Exception e)
-    //        {
-    //            return InternalServerError();
-    //        }
-    //    }
-
-    //}
-
     public class PeopleController : ApiController
     {
+        // Response
+            // Returns a dictionary of 'Person' objects
+            // Each person object is itself a Map structured
+            // object with an 'id' as key and other values
+            // which are EmailsSent, EmailsReceived, 
+            // DomainName, EmailName, and EmailAddress.
+        // Parameters
+
         private VenContext db
             = VenioWebApiHelper.getDatabaseContext();
 
         [HttpGet]
-        public IHttpActionResult Get()
+        public IHttpActionResult Get(
+            [FromUri] DateTime? startDate = null,
+            [FromUri] DateTime? endDate = null
+            )
         {
 
-            var emailAddresses = db.EmailAddresses.ToList();
+            // Check the request dateStart and dateEnd values
+            if (startDate.HasValue && endDate.HasValue)
+            {
+
+                if (startDate >= endDate)
+                    return Content(
+                        System.Net.HttpStatusCode.BadRequest,
+                        "End Date cannot be same as or before Start Date");
+            }
+            else
+            {
+                if (!endDate.HasValue) // 'end' has no value
+                    endDate = DateTime.MaxValue;
+                if (!startDate.HasValue) // 'start' has no value
+                    startDate = DateTime.MinValue;
+            }
+
+            var emailAddresses = db.EmailAddresses
+                .Where(tbl => tbl.Date >= startDate && tbl.Date <= endDate)
+                .ToList();
 
             //Create a new variable with all
             // recieved emails and user id
@@ -117,21 +68,6 @@ namespace EmailServicesAPI.Controllers
                     x.Key.SenderID,
                     EmailsSent = x.Count()
                 });
-
-            // Join the above two tables
-            // and add a column TotalEmails
-            //var tbl_usr_counts = (
-            //        from er in tbl_emails_received
-            //        join es in tbl_emails_sent
-            //        on er.RecepientID equals es.SenderID
-            //        select new
-            //        {
-            //            Id = er.RecepientID,
-            //            er.EmailsRecieved,
-            //            es.EmailsSent,
-            //            TotalEmails = er.EmailsRecieved + es.EmailsSent,
-            //        }
-            //    );
 
             var tbl_usr_counts = (
                     from email in emailAddresses
@@ -188,20 +124,42 @@ namespace EmailServicesAPI.Controllers
         }
     }
 
-    public class TimeController : ApiController
+    public class InteractionsController : ApiController
     {
+        // Response
+            // Returns an array of Interactions; each interaction
+            // contains a 'SenderID', 'RecepientID' and the number
+            // of emails sent by the sender to the recepient, within the
+            // specified timeframe.
+        // Parameters
+            // DateTime start : DateTime object in the format 'YYYY-MM-DD'
+            // DateTime end
+
         private VenContext db =
             VenioWebApiHelper.getDatabaseContext();
 
         [HttpGet]
-        public IHttpActionResult getDateTime(
-            [FromUri] DateTime start, [FromUri] DateTime end
+        public IHttpActionResult Get(
+            [FromUri] DateTime? startDate = null, 
+            [FromUri] DateTime? endDate = null
             )
         {
 
-            if (start > end)
-                return Content(System.Net.HttpStatusCode.BadRequest,
-                    "End Date cannot be before Start Date");
+            // Check the request dateStart and dateEnd values
+            if (startDate.HasValue && endDate.HasValue)
+            {
+
+                if (startDate >= endDate)
+                    return Content(
+                        System.Net.HttpStatusCode.BadRequest,
+                        "End Date cannot be same as or before Start Date");
+            } else
+            {
+                if (!endDate.HasValue) // 'end' has no value
+                    endDate = DateTime.MaxValue;
+                if (!startDate.HasValue) // 'start' has no value
+                    startDate = DateTime.MinValue;
+            }
 
             try
             {
@@ -214,9 +172,10 @@ namespace EmailServicesAPI.Controllers
                         select ead.Id
                     ).ToList().ElementAt(0));
 
+
                 var query = db.EmailAddresses
                     .Where(tbl =>
-                        tbl.Date <= end && tbl.Date >= start)
+                        tbl.Date <= endDate && tbl.Date >= startDate)
                     .Select(tbl =>
                        new
                        {
@@ -249,9 +208,10 @@ namespace EmailServicesAPI.Controllers
     public static class VenioWebApiHelper
     {
 
-        //
-        // Public Accessors
-        //
+        // Purpose
+            // Setup the Venio Database Context
+            // by initializing the Connection
+            // Using the Configuration Strings
 
         public static VenContext getDatabaseContext()
         {
