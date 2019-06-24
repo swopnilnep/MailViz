@@ -36,20 +36,22 @@ namespace EmailServicesAPI.Controllers
             }
             else
             {
-                if (!endDate.HasValue) // 'end' has no value
-                    endDate = DateTime.MaxValue;
-                if (!startDate.HasValue) // 'start' has no value
-                    startDate = DateTime.MinValue;
+                //if (!endDate.HasValue) // 'end' has no value
+                //    endDate = DateTime.MaxValue;
+                //if (!startDate.HasValue) // 'start' has no value
+                //    startDate = DateTime.MinValue;
             }
 
             var emailAddresses = db.EmailAddresses
-                .Where(tbl => tbl.Date >= startDate && tbl.Date <= endDate)
                 .ToList();
 
             //Create a new variable with all
             // recieved emails and user id
             var tbl_emails_received =
                 emailAddresses
+                .Where(
+                    x => x.Date >= startDate && x.Date <= endDate
+                    )
                 .GroupBy(x => new { x.RecepientID })
                 .Select(x => new
                 {
@@ -62,6 +64,9 @@ namespace EmailServicesAPI.Controllers
             // sent emails and usr id
             var tbl_emails_sent =
                 emailAddresses
+                .Where(
+                    x => x.Date >= startDate && x.Date <= endDate
+                    )
                 .GroupBy(x => new { x.SenderID })
                 .Select(x => new
                 {
@@ -113,7 +118,9 @@ namespace EmailServicesAPI.Controllers
             {
                 return Ok(
 
-                    tbl_usr_counts_and_info.ToDictionary(x => x.Id)
+                    tbl_usr_counts_and_info
+                    .OrderBy(x => x.Id)
+                    .ToDictionary(x => x.Id)
 
                     );
             }
@@ -175,7 +182,7 @@ namespace EmailServicesAPI.Controllers
 
                 var query = db.EmailAddresses
                     .Where(tbl =>
-                        tbl.Date <= endDate && tbl.Date >= startDate)
+                        tbl.Date >= startDate && tbl.Date <= endDate)
                     .Select(tbl =>
                        new
                        {
@@ -195,7 +202,7 @@ namespace EmailServicesAPI.Controllers
                        }
                     );
 
-                return Ok(query);
+                return Ok(query.OrderBy(x => x.SenderID));
             }
             catch (Exception e)
             {
