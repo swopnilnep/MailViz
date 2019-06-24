@@ -12,23 +12,23 @@ export class DataService {
   // API Configuration
   private API_URL = 'http://localhost:51750/api';
   private API_VERSION = 'v1';
-  private API_INTERACTIONS_CONTROLLER = 'Time';
+  private API_INTERACTIONS_CONTROLLER = 'Interactions';
   private API_PEOPLE_CONTROLLER = 'People';
   
   // Parameters
-  startDate = '2001-05-06';
-  endDate = '2002-05-09';
+  public startDate = '2001-05-06';
+  public endDate = '2001-05-09';
 
   constructor(private httpClient: HttpClient) { }
 
   // Get all interaction6
-  getInteractions(): Observable<Array<Interaction>> {
+  getInteractions(): Observable<any> {
     let q = `${this.API_URL}/${this.API_VERSION}/` +
       `${this.API_INTERACTIONS_CONTROLLER}`
 
     if (this.startDate && this.endDate){
       q += '?';
-      q += `start=${this.startDate}&end=${this.endDate}`;
+      q += `startDate=${this.startDate}&endDate=${this.endDate}`;
     }
 
     return this.httpClient.get<Array<Interaction>>
@@ -36,9 +36,16 @@ export class DataService {
   }
 
   // Get all persons
-  getPeople(): Observable<PersonMap> {
-    return this.httpClient.get<any>
-    (`${this.API_URL}/${this.API_VERSION}/${this.API_PEOPLE_CONTROLLER}/`);
+  getPeople(): Observable<any> {
+    let q = `${this.API_URL}/${this.API_VERSION}/${this.API_PEOPLE_CONTROLLER}`; 
+    
+    if (this.startDate && this.endDate){
+      q += '?';
+      q += `startDate=${this.startDate}&endDate=${this.endDate}`;
+    }
+
+    // console.log(q);
+    return this.httpClient.get<any>(q);
   }
 
   // Put and Delete methods are not implemented

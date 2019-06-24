@@ -1,13 +1,19 @@
-import { BrowserModule } from '@angular/platform-browser';
+// Modules
 import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
+// Project Components
 import { AppComponent } from './components/app/app.component';
 import { GraphComponent } from './components/graph/graph.component';
-import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { MenuComponent } from './components/menu/menu.component';
 import { TimelineComponent } from './components/timeline/timeline.component';
+import { EmailModalComponent } from './email-modal/email-modal.component';
+import { TabsModule } from 'ngx-bootstrap/tabs';
+import { DateRangePickerComponent } from './date-range-picker/date-range-picker.component';
 
 @NgModule({
   declarations: [
@@ -15,14 +21,19 @@ import { TimelineComponent } from './components/timeline/timeline.component';
     GraphComponent,
     MenuComponent,
     TimelineComponent,
+    EmailModalComponent,
+    DateRangePickerComponent,
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    BsDatepickerModule.forRoot()
+    BsDatepickerModule.forRoot(),
+    ModalModule.forRoot(),
+    TabsModule.forRoot()
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents : [EmailModalComponent]
 })
 export class AppModule { }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, IterableDiffers } from '@angular/core';
 import { DataService } from '../../services/data.service';
 import { Interaction } from '../../models/interaction';
 import { PersonMap, Person } from '../../models/person';
@@ -8,6 +8,10 @@ import * as Vis from 'vis';
 import { VisEdge } from 'src/app/models/vis';
 import { VisNode } from 'src/app/models/vis';
 import { VisNetworkOptions } from './options';
+
+// ngx-Bootstrap Imports
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+import { EmailModalComponent } from 'src/app/email-modal/email-modal.component';
 
 @Component({
   selector: 'app-graph',
@@ -20,16 +24,20 @@ export class GraphComponent implements OnInit {
   interactions: Array<Interaction>;
   people : PersonMap;
   network: Vis.Network;
+  bsModalRef : BsModalRef;
 
-  constructor(private dataService: DataService) {}
+  constructor(
+    private dataService: DataService,
+    private modalService : BsModalService
+    ) {}
 
   ngOnInit() {
 
     // Retrieve Data From the API with the dataService
-    this.dataService.getInteractions().subscribe(data => {
+    this.dataService.getInteractions().subscribe(res => {
 
-      this.interactions = new Array<Interactions>();
-      data.forEach(element => {
+      this.interactions = new Array<Interaction>();
+      res.forEach(element => {
         this.interactions.push(new Interaction(element));  
       });
 
@@ -48,7 +56,8 @@ export class GraphComponent implements OnInit {
       // Load the data into the newly created
       // PersonMap object 
       Object.keys(data).forEach( key =>
-        {this.people.set(
+        {
+          this.people.set(
           Number.parseInt(key), new Person(data[key])
           )}
       );
@@ -69,7 +78,15 @@ export class GraphComponent implements OnInit {
     // Set the network Edges
     let arrayOfEdges : Array<VisEdge> = [];
     this.interactions.forEach(itr => {
-        arrayOfEdges.push(new VisEdge(itr));
+        let myEdge = new VisEdge(itr);
+        myEdge.setTitle(
+          '<b>Emails Sent: </b> ' + itr.emailCount 
+          + '<br><b>By : </b>' + this.people.get(itr.senderID).emailName
+          + '<br><b>To : </b>' + this.people.get(itr.recepientID).emailName
+          + '<br><i>(Double click to view)</i>'
+        )
+
+        arrayOfEdges.push(myEdge);
 
         // Add the People to the set
         // of people Ids to later make
@@ -105,24 +122,66 @@ export class GraphComponent implements OnInit {
     let container = 
       document.getElementById('network');
 
+
     // Generate network Graph
     this.network = new Vis.Network(
       container, data, options
       );
 
+
+    // Netwrok Events
+
+
+    // Progress Indicator (Spinner)
     this.network.on('stabilizationProgress', function(params) {
       document.getElementById('indicator').innerHTML = 
         Math.round((params.iterations/params.total)*100) + '%';
     });
 
+    // Remove Spinner DOM Element once loaded
     this.network.once('stabilizationIterationsDone', function() {
       document.getElementById('spinner').style.display = 'none';
     });
 
-    this.network.on('hovernode', function() {
-      changeCursor('grab');
-    })
+
+    // Open Modal on doubleClick
+    this.network.on('doubleClick', (params) => {
+      // Node: Using arrow function because functions by default
+      // cannot access the component class scope
+      
+      let elementOnClick : number;
+      let isNode : boolean;
+
+      let nodeAtPoint = this.network.getNodeAt(params.pointer.DOM);
+      let edgeAtPoint = this.network.getEdgeAt(params.pointer.DOM);
+
+      // Show modal only when double clicked on node or edge
+      if (nodeAtPoint) {
+        elementOnClick = nodeAtPoint;
+        isNode = true;
+      } else if (edgeAtPoint) {
+        elementOnClick = edgeAtPoint;
+        isNode = false;
+      }
+
+      if ( elementOnClick ) {
+        this.popupModal(elementOnClick, isNode);
+      }
+
+    });
 
   }
 
+  popupModal(elementID : number, isNode : boolean) {
+    const initialState = {
+      list : [
+      `You clicked on ${elementID}`,
+      ],
+      title : isNode ? 
+        this.people.get(elementID).emailName + '\'s Interactions' : "Interaction"
+    }
+
+    this.bsModalRef = this.modalService.show(EmailModalComponent, {initialState});
+    this.bsModalRef.content.closeBtnName = 'Close';
+  }
 }

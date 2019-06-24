@@ -1,13 +1,13 @@
 export class VisNetworkOptions {
     physics = {
-        // enabled: true,
+        enabled: true,
         barnesHut: {
-          gravitationalConstant: -8250,
-          centralGravity: 0.3,
-          springLength: 95,
-          springConstant: 0.005,
-          damping: 0.5,
-          avoidOverlap: 0.08
+          gravitationalConstant: -3000,
+          centralGravity: 0.5,
+          springLength: 50,
+          springConstant: 0.01,
+          damping: 0.3,
+          avoidOverlap: 0.1
         },
         // forceAtlas2Based: {
         //   gravitationalConstant: -50,
@@ -142,11 +142,11 @@ export class VisNetworkOptions {
         // physics: true,
         scaling: {
           min: 8,
-          max: 15,
+          max: 20,
           label: {
             // enabled: true,
             min: 10,
-            max: 20,
+            max: 15,
             // maxVisible: 30,
             // drawThreshold: 5
           },
@@ -180,7 +180,7 @@ export class VisNetworkOptions {
         arrows: {
           to:     {enabled: true, scaleFactor:1, type:'arrow'},
           // middle: {enabled: true, scaleFactor:1, type:'arrow'},
-          from:   {enabled: true, scaleFactor:1, type:'arrow'}
+          // from:   {enabled: true, scaleFactor:1, type:'arrow'}
         },
         arrowStrikethrough: true,
         // chosen: true,
@@ -237,16 +237,16 @@ export class VisNetworkOptions {
         // labelHighlightBold: true,
         // length: undefined,
         // physics: true,
-        // scaling:{
-        //   min: 1,
-        //   max: 15,
-        //   label: {
+        scaling:{
+          min: 1,
+          max: 5,
+          // label: {
             // enabled: true,
             // min: 14,
             // max: 30,
             // maxVisible: 30,
             // drawThreshold: 5
-        //   },
+          // },
         //   customScalingFunction: function (min,max,total,value) {
         //     if (max === min) {
         //       return 0.5;
@@ -256,7 +256,7 @@ export class VisNetworkOptions {
         //       return Math.max(0,(value - min)*scale);
         //     }
         //   }
-        // },
+        },
         // selectionWidth: 1,
         // selfReferenceSize:20,
         // shadow:{
@@ -275,5 +275,9 @@ export class VisNetworkOptions {
         // value: undefined,
         // width: 1,
         // widthConstraint: false
+    };
+
+    layout = {
+      improvedLayout: false
     };
 };
