@@ -103,8 +103,6 @@ namespace EmailServicesAPI.Controllers
                     select new
                     {
                         personName.Id,
-                        //TotalEmails = 
-                        //    personCounts.EmailsSent + personCounts.EmailsReceived,
                         personCounts.EmailsSent,
                         personCounts.EmailsReceived,
                         personName.EmailAddress,
@@ -212,6 +210,111 @@ namespace EmailServicesAPI.Controllers
 
     }
 
+    public class DetailsController : ApiController
+    {
+        // Response
+        // Parameters
+
+        private VenContext db =
+            VenioWebApiHelper.getDatabaseContext();
+
+        [HttpGet]
+        public IHttpActionResult Get(
+
+            // senderID required parameter. Initializes
+            // to -2147483648 if not supplied
+            [FromUri] int? senderID = int.MinValue,
+            [FromUri] int? recipientID = null,
+            [FromUri] DateTime? startDate = null,
+            [FromUri] DateTime? endDate = null
+            )
+        {
+            // Verify SenderID Value is Provided
+            if (senderID == int.MinValue)
+            {
+                return Content(
+                    System.Net.HttpStatusCode.BadRequest,
+                    "Error: Please supply a value for senderID"
+                    );
+            }
+
+            // Based on whether the query is being done
+            // for a 'node' or an 'edge' in the frontend
+            // Email Network Graph
+            bool recipientIsProvided = false;
+            if (recipientID != null)
+            {
+                recipientIsProvided = true;
+            }
+
+            // Check the request dateStart and dateEnd values
+            if (startDate.HasValue && endDate.HasValue)
+            {
+
+                if (startDate >= endDate)
+                    return Content(
+                        System.Net.HttpStatusCode.BadRequest,
+                        "End Date cannot be same as or before Start Date");
+            }
+            else
+            {
+                if (!endDate.HasValue) // 'end' has no value
+                    endDate = DateTime.MaxValue;
+                if (!startDate.HasValue) // 'start' has no value
+                    startDate = DateTime.MinValue;
+            }
+
+            try
+            {
+
+                // Create a table of all emails sent by one person
+                var tbl_emails_sender =
+                    db.EmailAddresses
+                    .Where(x => 
+                            (x.SenderID == senderID)
+                        &&
+                            (x.Date >= startDate && x.Date <= endDate)
+                        );
+
+                if ( recipientIsProvided )
+                {
+                    tbl_emails_sender = tbl_emails_sender
+                        .Where(x => x.RecepientID == recipientID);
+                }
+
+                var li_emails_sender = tbl_emails_sender
+                    .Select(x =>
+                        new
+                        {
+                            x.Id,
+                            x.FileID,
+                            x.SenderID,
+                            x.RecepientID,
+                            x.Date
+                        }).ToList();
+
+
+                // Count of emails sent by the 'SenderID' to 'recepientID'
+                // Only one row if recepientID is specified as param
+                var li_participants = li_emails_sender
+                    .GroupBy(x => new { x.RecepientID })
+                    .Select(x =>
+                        new
+                        {
+                            x.Key.RecepientID,
+                            EmailsReceived = x.Count()
+                        });
+
+                return Ok( li_participants );
+            }
+            catch (Exception e)
+            {
+                return InternalServerError();
+            }
+        }
+
+    }
+
     public static class VenioWebApiHelper
     {
 
@@ -228,6 +331,13 @@ namespace EmailServicesAPI.Controllers
                 .ConnectionStrings["EmailDetailsEntities"]
                 .ConnectionString
                 );
+        }
+
+        public static long getUnknowns()
+        {
+            // Return the id that contains the unknown values
+            long l = 0;
+            return l;
         }
     }
 
