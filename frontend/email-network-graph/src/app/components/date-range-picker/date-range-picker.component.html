@@ -1,0 +1,13 @@
+<div class="row">
+  <div class="col form-group">
+    <input 
+    class="form-control" 
+    #drp="bsDaterangepicker" 
+    bsDaterangepicker [(ngModel)]="bsRangeValue"
+    bsDaterangepicker [bsConfig]="{ isAnimated:true, adaptivePosition: true }"
+    >
+  </div>
+  <!-- <div class="col-xs-12 col-12 col-md-3 form-group">
+    <button class="btn btn-success" (click)="drp.toggle()" [attr.aria-expanded]="drp.isOpen">Date Range Picker</button>
+  </div> -->
+</div>

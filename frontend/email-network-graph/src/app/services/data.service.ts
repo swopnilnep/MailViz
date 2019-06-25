@@ -16,8 +16,8 @@ export class DataService {
   private API_PEOPLE_CONTROLLER = 'People';
   
   // Parameters
-  public startDate = '2001-05-06';
-  public endDate = '2001-05-09';
+  public startDate = '1980-05-06';
+  public endDate = '2018-05-09';
 
   constructor(private httpClient: HttpClient) { }
 

@@ -10,12 +10,12 @@ export class EmailModalComponent implements OnInit {
 
   title: string;
   closeBtnName: string;
-  list: any[] = [];
 
-  constructor(private bsModalRef: BsModalRef) { }
+  domains: string[] = [];
+  interactions: any[] = [];
 
-  ngOnInit() {
-    // this.list.push('HELLO WORLD!');
-  }
+  constructor(private bsModalRef: BsModalRef, bsModalService: BsModalService) {}
+
+  ngOnInit() { }
 
 }

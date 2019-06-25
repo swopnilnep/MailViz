@@ -11,7 +11,7 @@ import { VisNetworkOptions } from './options';
 
 // ngx-Bootstrap Imports
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
-import { EmailModalComponent } from 'src/app/email-modal/email-modal.component';
+import { EmailModalComponent } from 'src/app/components/email-modal/email-modal.component';
 
 @Component({
   selector: 'app-graph',
@@ -174,11 +174,31 @@ export class GraphComponent implements OnInit {
 
   popupModal(elementID : number, isNode : boolean) {
     const initialState = {
-      list : [
-      `You clicked on ${elementID}`,
+      companies: [
+        'google.com',
+        'yelp.com',
+        'taobao.com',
+        'alibaba.com'
       ],
       title : isNode ? 
-        this.people.get(elementID).emailName + '\'s Interactions' : "Interaction"
+        this.people.get(elementID).emailName + '\'s Interactions' : "Interaction",
+      people : [
+        {
+          name: "Test Dummy",
+          email: "email@email.com",
+          count: "500"
+        },
+        {
+          name: "Phillip Davis",
+          email: "jjjj@ahh.com",
+          count: "687"
+        },
+        {
+          name: "Monty Python",
+          email: "python@monty.com",
+          count: "453"
+        }
+      ]
     }
 
     this.bsModalRef = this.modalService.show(EmailModalComponent, {initialState});

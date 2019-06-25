@@ -1,0 +1,76 @@
+<div class="modal-header">
+    <h4 class="modal-title pull-left">{{title}}</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body large-modal">
+    <tabset [justified]="true">
+        <tab heading="Summary">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4">
+                        <h5>
+                            Entities
+                        </h5>
+                        <ol>
+                            <li *ngFor="let company of companies" class="list-item">
+                              {{ company }}
+                            </li>
+                        </ol>
+                    </div>
+                    <div class="col-md-8">
+                        <h5>
+                            Most Contacted
+                        </h5>
+                        <table class="table table-condensed">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        Name
+                                    </th>
+                                    <th>
+                                        Email
+                                    </th>
+                                    <th>
+                                        Count
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let person of people">
+                                    <td>
+                                        {{ person.name }}
+                                    </td>
+                                    <td>
+                                        {{ person.email }}
+                                    </td>
+                                    <td>
+                                        {{ person.count }}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <h3>
+                            Timeline
+                        </h3>
+
+                        <div id="visualization"></div>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </tab>
+        <tab heading="View">This will be a table of the person's emails</tab>
+
+    </tabset>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-default" (click)="bsModalRef.hide()">{{closeBtnName}}</button>
+</div>

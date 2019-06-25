@@ -5,15 +5,16 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { FormsModule } from '@angular/forms';
 
 // Project Components
 import { AppComponent } from './components/app/app.component';
 import { GraphComponent } from './components/graph/graph.component';
 import { MenuComponent } from './components/menu/menu.component';
 import { TimelineComponent } from './components/timeline/timeline.component';
-import { EmailModalComponent } from './email-modal/email-modal.component';
+import { EmailModalComponent } from './components/email-modal/email-modal.component';
 import { TabsModule } from 'ngx-bootstrap/tabs';
-import { DateRangePickerComponent } from './date-range-picker/date-range-picker.component';
+import { DateRangePickerComponent } from './components/date-range-picker/date-range-picker.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { DateRangePickerComponent } from './date-range-picker/date-range-picker.
     BrowserModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    FormsModule,
     BsDatepickerModule.forRoot(),
     ModalModule.forRoot(),
     TabsModule.forRoot()
