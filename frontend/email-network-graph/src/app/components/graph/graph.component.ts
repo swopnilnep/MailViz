@@ -24,6 +24,11 @@ export class GraphComponent implements OnInit {
   interactions: Array<Interaction>;
   people : PersonMap;
   network: Vis.Network;
+
+  detail_domains;
+  detail_participants;
+  detail_timeseries;
+
   bsModalRef : BsModalRef;
 
   constructor(
@@ -172,33 +177,52 @@ export class GraphComponent implements OnInit {
 
   }
 
+  getDetails( senderID : number ){
+
+    this.detail_domains = [];
+    this.detail_participants = [];
+
+    this.dataService.getDetails(senderID).subscribe( res => {
+      
+      res.domains.forEach(element => {
+        this.detail_domains.push(element);
+      });
+
+    });
+
+    this.dataService.getDetails(senderID).subscribe( res => {
+      
+      res.participants.forEach(element => {
+
+        let p = new Person();
+        p.id = element.recepientID;
+        p.emailName = this.people.get(
+            Number( p.id )
+          ).emailName;
+        p.emailAddress = this.people.get(
+            Number( p.id )
+          ).emailAddress;
+        p.emailsReceived = element.emailsReceived;
+
+        this.detail_participants.push(p);
+      });
+
+    });
+  }
+
   popupModal(elementID : number, isNode : boolean) {
+    
+    this.getDetails( elementID );
+    
     const initialState = {
-      companies: [
-        'google.com',
-        'yelp.com',
-        'taobao.com',
-        'alibaba.com'
-      ],
+      domains: this.detail_domains,
       title : isNode ? 
-        this.people.get(elementID).emailName + '\'s Interactions' : "Interaction",
-      people : [
-        {
-          name: "Test Dummy",
-          email: "email@email.com",
-          count: "500"
-        },
-        {
-          name: "Phillip Davis",
-          email: "jjjj@ahh.com",
-          count: "687"
-        },
-        {
-          name: "Monty Python",
-          email: "python@monty.com",
-          count: "453"
-        }
-      ]
+        this.people
+          .get(elementID)
+          .emailName 
+          + '\'s Interactions' 
+          : "Interaction",
+      participants : this.detail_participants
     }
 
     this.bsModalRef = this.modalService.show(EmailModalComponent, {initialState});

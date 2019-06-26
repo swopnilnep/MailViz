@@ -7,17 +7,19 @@ export class Person {
     emailsReceived: number;
     emailsSent: number;   
 
-    constructor(d : any) {
-        this.id = d.id;
-        this.emailName = d.emailName;
-        this.emailAddress = d.emailAddress;
-        // The emails 'received' is spelled
-        // differently from the one from the API
-        // which spells it as 'recieved'
-        this.emailsReceived = d.emailsReceived;
-        this.emailsSent = d.emailsSent;
-        this.domainName = d.domainName;
-        this.totalEmails = d.totalEmails;
+    constructor(data? : any) {
+        if (data){
+            this.id = data.id;
+            this.emailName = data.emailName;
+            this.emailAddress = data.emailAddress;
+            // The emails 'received' is spelled
+            // differently from the one from the API
+            // which spells it as 'recieved'
+            this.emailsReceived = data.emailsReceived;
+            this.emailsSent = data.emailsSent;
+            this.domainName = data.domainName;
+            this.totalEmails = data.totalEmails;
+        }
     }
 }
 

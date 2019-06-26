@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Interaction } from '../models/interaction';
-import { PersonMap } from '../models/person';
 
 @Injectable({
   providedIn: 'root'
@@ -14,10 +13,11 @@ export class DataService {
   private API_VERSION = 'v1';
   private API_INTERACTIONS_CONTROLLER = 'Interactions';
   private API_PEOPLE_CONTROLLER = 'People';
+  private API_DETAILS_CONTROLLER = 'Details';
   
   // Parameters
-  public startDate = '1980-05-06';
-  public endDate = '2018-05-09';
+  public startDate = '0001-05-06';
+  public endDate = '9999-05-09';
 
   constructor(private httpClient: HttpClient) { }
 
@@ -48,5 +48,22 @@ export class DataService {
     return this.httpClient.get<any>(q);
   }
 
-  // Put and Delete methods are not implemented
+  // Get Details object with
+  // internal objects: participants, domain, timeseries
+  getDetails( senderID : number ) : Observable<any> {
+    let q = `${this.API_URL}/${this.API_VERSION}/${this.API_DETAILS_CONTROLLER}`; 
+    
+    q += '?';
+    q += `senderID=${senderID}`
+
+    if (this.startDate && this.endDate){
+      q += `&startDate=${this.startDate}` 
+        + `&endDate=${this.endDate}`;
+    }
+
+    // console.log(q);
+    return this.httpClient.get<any>(q);
+
+  }
+
 }
