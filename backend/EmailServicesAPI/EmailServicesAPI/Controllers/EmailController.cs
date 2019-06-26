@@ -8,24 +8,33 @@ namespace EmailServicesAPI.Controllers
     public class PeopleController : ApiController
     {
         // Response
-            // Returns a dictionary of 'Person' objects
+            // Returns a dictionary of objects, each representing a person
             // Each person object is itself a Map structured
             // object with an 'id' as key and other values
             // which are EmailsSent, EmailsReceived, 
             // DomainName, EmailName, and EmailAddress.
         // Parameters
+            // startDate (optional) : DateTime object
+            // endDate (optional) : DateTime object
+        // Note
+            // This will NOT throw an error when the startDate
+            // or endDate format is incorrect. Instead, it will
+            // take 'DateTime.MaxValue' and 'DateTime.MinValue'
+            // The correct format is YYYY-MM-DDThh:mm:ss
 
         private VenContext db
             = VenioWebApiHelper.getDatabaseContext();
 
         [HttpGet]
         public IHttpActionResult Get(
+            // Optional Parameters
             [FromUri] DateTime? startDate = null,
             [FromUri] DateTime? endDate = null
             )
         {
 
-            // Check the request dateStart and dateEnd values
+            // Check the dateStart and dateEnd values
+            // from the GET request
             if (startDate.HasValue && endDate.HasValue)
             {
 
@@ -36,22 +45,35 @@ namespace EmailServicesAPI.Controllers
             }
             else
             {
-                //if (!endDate.HasValue) // 'end' has no value
-                //    endDate = DateTime.MaxValue;
-                //if (!startDate.HasValue) // 'start' has no value
-                //    startDate = DateTime.MinValue;
+                if (!endDate.HasValue) // 'end' has no value
+                    endDate = DateTime.MaxValue;
+                if (!startDate.HasValue) // 'start' has no value
+                    startDate = DateTime.MinValue;
             }
 
+
+            // Convert the database to a list (or any iterable
+            // interface) so that each of the variables
+            // further querying from this variable will
+            // be a list or an array
             var emailAddresses = db.EmailAddresses
                 .ToList();
 
-            //Create a new variable with all
+            // Create a new variable with all
             // recieved emails and user id
+
+            long unknownsID = 
+                VenioWebApiHelper.getUnknowns();
+
             var tbl_emails_received =
                 emailAddresses
                 .Where(
                     x => x.Date >= startDate && x.Date <= endDate
                     )
+                .Where(tbl =>
+                        tbl.RecepientID != unknownsID
+                        &&
+                        tbl.SenderID != unknownsID)
                 .GroupBy(x => new { x.RecepientID })
                 .Select(x => new
                 {
@@ -61,7 +83,7 @@ namespace EmailServicesAPI.Controllers
                 });
 
             // Create a new variable with all
-            // sent emails and usr id
+            // sent emails and user id
             var tbl_emails_sent =
                 emailAddresses
                 .Where(
@@ -74,6 +96,11 @@ namespace EmailServicesAPI.Controllers
                     EmailsSent = x.Count()
                 });
 
+            // Combine the above two tables, tbl_emails_recieved
+            // and tbl_emails sent by doing an outer left join
+            // of the two tables to include all the
+            // emailsSent and emailRecieved values
+            // ( Convert null values to 0 )
             var tbl_usr_counts = (
                     from email in emailAddresses
                     join sent in tbl_emails_sent
@@ -137,8 +164,9 @@ namespace EmailServicesAPI.Controllers
             // of emails sent by the sender to the recepient, within the
             // specified timeframe.
         // Parameters
-            // DateTime start : DateTime object in the format 'YYYY-MM-DD'
-            // DateTime end
+            // DateTime start : DateTime object in the 
+            // format 'YYYY-MM-DDTHH:MM:SS:mmm'
+            // DateTime end : Same as above
 
         private VenContext db =
             VenioWebApiHelper.getDatabaseContext();
@@ -170,14 +198,10 @@ namespace EmailServicesAPI.Controllers
             {
                 // Selects the ID that does not have a name or an email
                 // address and stores it as an integer (64Bit Signed)
-                long unknownsID = Convert.ToInt64((
-                        from ead in db.EmailAddressList
-                        where ead.EmailName == "[NO_NAME]"
-                        && ead.EmailAddress == "[NO_ADDRESS]"
-                        select ead.Id
-                    ).ToList().ElementAt(0));
+                long unknownsID = 
+                    VenioWebApiHelper.getUnknowns();
 
-
+                // Exclude the unknown IDs from the table
                 var query = db.EmailAddresses
                     .Where(tbl =>
                         tbl.Date >= startDate && tbl.Date <= endDate)
@@ -189,7 +213,9 @@ namespace EmailServicesAPI.Controllers
                        }
                     )
                     .Where(tbl => 
-                        tbl.RecepientID != unknownsID && tbl.SenderID != unknownsID)
+                        tbl.RecepientID != unknownsID 
+                        && 
+                        tbl.SenderID != unknownsID)
                     .GroupBy(tbl => new { tbl.SenderID, tbl.RecepientID })
                     .Select(tbl =>
                        new
@@ -212,8 +238,24 @@ namespace EmailServicesAPI.Controllers
 
     public class DetailsController : ApiController
     {
-        // Response
-        // Parameters
+        ///
+        /// 
+        /// Response
+        /// 
+        /// Returns an object of objects which include a 'domains'
+        /// object, 'participants' object and 'timeseries' object,
+        /// which represent participants, domains involved in an interaction
+        /// This endpoint corresponds with the node or edge details
+        /// section in the people-network-graph.
+        /// 
+        /// Parameters
+        /// 
+        /// senderID : (required) 
+        /// recipientID : (optional)
+        /// startDate : (optional)
+        /// endDate : (optional)
+        /// 
+        ///
 
         private VenContext db =
             VenioWebApiHelper.getDatabaseContext();
@@ -287,16 +329,17 @@ namespace EmailServicesAPI.Controllers
                         new
                         {
                             x.Id,
+                            x.Date,
                             x.FileID,
                             x.SenderID,
-                            x.RecepientID,
-                            x.Date
+                            x.RecepientID
                         }).ToList();
 
 
                 // Count of emails sent by the 'SenderID' to 'recepientID'
                 // Only one row if recepientID is specified as param
-                var li_participants = li_emails_sender
+                var li_participants = 
+                    li_emails_sender
                     .GroupBy(x => new { x.RecepientID })
                     .Select(x =>
                         new
@@ -305,7 +348,50 @@ namespace EmailServicesAPI.Controllers
                             EmailsReceived = x.Count()
                         });
 
-                return Ok( li_participants );
+                var tbl_union =
+                    li_emails_sender
+                    .Select(x =>
+                           x.RecepientID)
+                        .Union(
+                           li_emails_sender
+                           .Select( x => 
+                                x.SenderID )
+                        );
+
+                // 'tbl_domain_count' is a linear
+                // list of ids
+                var tbl_domain_count =
+                    (
+                        from personId in tbl_union
+                        join personRef in db.EmailAddressList.ToList()
+                        on personId equals personRef.Id
+
+                        select new
+                        {
+                            personRef.DomainName,
+                            personRef.Id
+                        }
+                    )
+                    .GroupBy( x => new { x.DomainName })
+                    .Select( x =>
+                        new
+                        {
+                            x.Key.DomainName,
+                            TotalEmails = x.Count()
+                        }
+                    )
+                    .OrderByDescending(x => 
+                        x.TotalEmails
+                        );
+                    
+
+                return Ok( 
+                    new
+                    {
+                        participants = li_participants,
+                        domains = tbl_domain_count
+                    }
+                );
             }
             catch (Exception e)
             {
@@ -335,9 +421,18 @@ namespace EmailServicesAPI.Controllers
 
         public static long getUnknowns()
         {
-            // Return the id that contains the unknown values
-            long l = 0;
-            return l;
+
+            VenContext db = getDatabaseContext();
+
+            long unknownsID = Convert.ToInt64((
+                from ead in db.EmailAddressList
+                where ead.EmailName == "[NO_NAME]"
+                && ead.EmailAddress == "[NO_ADDRESS]"
+                select ead.Id
+            ).ToList().ElementAt(0));
+
+            return unknownsID;
+
         }
     }
 
