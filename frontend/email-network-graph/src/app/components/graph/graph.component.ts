@@ -1,5 +1,5 @@
 import { Component, OnInit, IterableDiffers } from '@angular/core';
-import { DataService } from '../../services/data.service';
+import { ApiService } from '../../services/api.service';
 import { Interaction } from '../../models/interaction';
 import { PersonMap, Person } from '../../models/person';
 
@@ -7,7 +7,7 @@ import { PersonMap, Person } from '../../models/person';
 import * as Vis from 'vis';
 import { VisEdge } from 'src/app/models/vis';
 import { VisNode } from 'src/app/models/vis';
-import { VisNetworkOptions } from './options';
+import { VisNetworkOptions } from '../../configurations/options';
 
 // ngx-Bootstrap Imports
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
@@ -32,7 +32,7 @@ export class GraphComponent implements OnInit {
   bsModalRef : BsModalRef;
 
   constructor(
-    private dataService: DataService,
+    private dataService: ApiService,
     private modalService : BsModalService
     ) {}
 
@@ -121,7 +121,7 @@ export class GraphComponent implements OnInit {
     };
 
     // Set the network options
-    let options = new VisNetworkOptions();
+    let options : any = new VisNetworkOptions();
 
     // Set the network container
     let container = 
@@ -162,10 +162,10 @@ export class GraphComponent implements OnInit {
 
       // Show modal only when double clicked on node or edge
       if (nodeAtPoint) {
-        elementOnClick = nodeAtPoint;
+        elementOnClick = Number( nodeAtPoint );
         isNode = true;
       } else if (edgeAtPoint) {
-        elementOnClick = edgeAtPoint;
+        elementOnClick = Number( edgeAtPoint );
         isNode = false;
       }
 
@@ -215,6 +215,9 @@ export class GraphComponent implements OnInit {
     this.getDetails( elementID );
     
     const initialState = {
+      senderID: this.people.get(
+        elementID
+      ).id,
       domains: this.detail_domains,
       title : isNode ? 
         this.people
@@ -225,7 +228,11 @@ export class GraphComponent implements OnInit {
       participants : this.detail_participants
     }
 
-    this.bsModalRef = this.modalService.show(EmailModalComponent, {initialState});
+    this.bsModalRef = this.modalService.show(
+      EmailModalComponent, 
+      Object.assign({ initialState }, {class: 'modal-lg-custom'})
+    )
+
     this.bsModalRef.content.closeBtnName = 'Close';
   }
 }

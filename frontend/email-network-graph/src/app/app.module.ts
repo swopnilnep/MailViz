@@ -6,6 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { FormsModule } from '@angular/forms';
+import { TabsModule } from 'ngx-bootstrap/tabs';
 
 // Project Components
 import { AppComponent } from './components/app/app.component';
@@ -13,8 +14,11 @@ import { GraphComponent } from './components/graph/graph.component';
 import { MenuComponent } from './components/menu/menu.component';
 import { TimelineComponent } from './components/timeline/timeline.component';
 import { EmailModalComponent } from './components/email-modal/email-modal.component';
-import { TabsModule } from 'ngx-bootstrap/tabs';
 import { DateRangePickerComponent } from './components/date-range-picker/date-range-picker.component';
+
+// Plotting Modules
+import * as PlotlyJS from 'plotly.js/dist/plotly.js'; // MIT License
+import { PlotlyModule } from 'angular-plotly.js'; // MIT License
 
 @NgModule({
   declarations: [
@@ -30,6 +34,7 @@ import { DateRangePickerComponent } from './components/date-range-picker/date-ra
     HttpClientModule,
     BrowserAnimationsModule,
     FormsModule,
+    PlotlyModule,
     BsDatepickerModule.forRoot(),
     ModalModule.forRoot(),
     TabsModule.forRoot()

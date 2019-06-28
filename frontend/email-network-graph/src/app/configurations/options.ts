@@ -281,3 +281,11 @@ export class VisNetworkOptions {
       improvedLayout: false
     };
 };
+
+export class VisTimelineOptions {
+
+  height = '300px';
+  maxHeight = "500px";
+
+
+}

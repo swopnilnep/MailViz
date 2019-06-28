@@ -26,9 +26,11 @@
             "styles": [
               "./node_modules/bootstrap/dist/css/bootstrap.min.css",
               "./node_modules/ngx-bootstrap/datepicker/bs-datepicker.css",
-              "src/styles.css"
+              "src/styles.css",
+              "./node_modules/vis/dist/vis.min.css",
+              "./node_modules/vis/dist/vis-timeline-graph2d.min.css"
             ],
-            "scripts": []
+            "scripts": ["./node_modules/vis/dist/vis.min.js"]
           },
           "configurations": {
             "production": {
