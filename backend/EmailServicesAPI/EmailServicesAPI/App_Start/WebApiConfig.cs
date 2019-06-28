@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Newtonsoft.Json.Serialization;
+﻿using Newtonsoft.Json.Serialization;
+// Using MIT License
+// https://github.com/JamesNK/Newtonsoft.Json/blob/master/LICENSE.md
+
 using System.Web.Http;
 using System.Web.Http.Cors;
 

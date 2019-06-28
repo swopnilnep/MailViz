@@ -13,6 +13,7 @@ namespace EmailServicesAPI.Context
 
             public DbSet<EmailAddresses> EmailAddresses { get; set; }
             public DbSet<EmailAddressList> EmailAddressList { get; set; }
+            public DbSet<EmailMeta> EmailMeta { get; set; }
         }
 
     }

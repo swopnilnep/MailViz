@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Web.Http;
 using static EmailServicesAPI.Context.DatabaseContext;
+using static System.Data.Entity.SqlServer.SqlFunctions;
 
 namespace EmailServicesAPI.Controllers
 {
@@ -20,7 +21,9 @@ namespace EmailServicesAPI.Controllers
             // This will NOT throw an error when the startDate
             // or endDate format is incorrect. Instead, it will
             // take 'DateTime.MaxValue' and 'DateTime.MinValue'
-            // The correct format is YYYY-MM-DDThh:mm:ss
+            // The correct format is YYYY-MM-DDThh:mm:ss or
+            // any other format that is supported in the C#
+            // 'DateTime' class constructor
 
         private VenContext db
             = VenioWebApiHelper.getDatabaseContext();
@@ -63,7 +66,7 @@ namespace EmailServicesAPI.Controllers
             // recieved emails and user id
 
             long unknownsID = 
-                VenioWebApiHelper.getUnknowns();
+                VenioWebApiHelper.getUnknown();
 
             var tbl_emails_received =
                 emailAddresses
@@ -158,15 +161,33 @@ namespace EmailServicesAPI.Controllers
 
     public class InteractionsController : ApiController
     {
-        // Response
-            // Returns an array of Interactions; each interaction
-            // contains a 'SenderID', 'RecepientID' and the number
-            // of emails sent by the sender to the recepient, within the
-            // specified timeframe.
-        // Parameters
-            // DateTime start : DateTime object in the 
-            // format 'YYYY-MM-DDTHH:MM:SS:mmm'
-            // DateTime end : Same as above
+
+        /// <summary>
+        ///  
+        /// Response
+        ///     Returns an array of Interactions of all the people
+        ///     (email addresses) in the database, in the given
+        ///     timespan, who sent or recieved emails.
+        ///     
+        ///     Each 'Interaction' within the array contains a 
+        ///     'SenderID', 'RecepientID' and the number of emails
+        ///     sent by the sender to the recepient (in the specified
+        ///     timeframe)
+        ///     
+        ///     If no timespan is provided, the default timespan that
+        ///     will be taken is DateTime.MinValue and DateTime.MaxValue
+        ///     respectively
+        ///     
+        /// Parameters
+        ///     (required parameters)
+        /// 
+        ///     (optional parameters)
+        ///     startDate : DateTime Object (accepts any format
+        ///         in the DateTime class constructor)
+        ///     endDate : DateTime Object (same as above)     
+        ///     
+        /// 
+        /// </summary>
 
         private VenContext db =
             VenioWebApiHelper.getDatabaseContext();
@@ -199,7 +220,7 @@ namespace EmailServicesAPI.Controllers
                 // Selects the ID that does not have a name or an email
                 // address and stores it as an integer (64Bit Signed)
                 long unknownsID = 
-                    VenioWebApiHelper.getUnknowns();
+                    VenioWebApiHelper.getUnknown();
 
                 // Exclude the unknown IDs from the table
                 var query = db.EmailAddresses
@@ -251,6 +272,7 @@ namespace EmailServicesAPI.Controllers
         /// Parameters
         /// 
         /// senderID : (required) 
+        /// 
         /// recipientID : (optional)
         /// startDate : (optional)
         /// endDate : (optional)
@@ -401,6 +423,358 @@ namespace EmailServicesAPI.Controllers
 
     }
 
+    public class TimeAggregateController : ApiController
+    {
+
+        /// <summary>
+        /// 
+        /// Response
+        ///     This  controller aggregates
+        ///     count values based on the given timespan.
+        ///     (Takes 0001/01/01 to 9999/12/31 if timespan
+        ///     not provided). For each "viewBy" argument,
+        ///     it groups by that argument and displays 
+        ///     the number of emails grouped by that argument.
+        ///     The default viewBy argument is "month". 
+        ///     
+        ///     In the default case,
+        ///     the response would be 12 objects respective to
+        ///     the 12 months with the count of emails in each
+        ///     month.
+        ///     
+        /// Parameters
+        /// 
+        ///     senderID : number corresponding to senderIDs
+        ///         in the database (required)
+        /// 
+        ///     recepientID : number corresponding to recepientIDs
+        ///         in the database (optional)
+        ///     startDate : DateTime object (optional)
+        ///     endDate : DateTime object (optional)
+        ///     viewBy : string
+        ///     
+        ///         Accepted Values for 'viewBy'
+        ///             * "month" (12 * month of year)
+        ///             * "weekday" (7 * day of week)
+        ///             * "year" (all years in the timespan)
+        ///             * "quarter" (4 * 3 month-intervals)
+        ///             * "hour" (24 * hour of day)
+        ///     
+        /// </summary>
+
+        private VenContext db
+            = VenioWebApiHelper.getDatabaseContext();
+
+        [HttpGet]
+        public IHttpActionResult Get(
+
+            // (required)
+            [FromUri] int? senderID = int.MinValue, 
+
+            // (optional)
+            [FromUri] DateTime? startDate = null,
+            [FromUri] DateTime? endDate = null,
+            [FromUri] int? recepientID = int.MinValue,
+            [FromUri] string viewBy = "month"
+
+            )
+        {
+            try
+            {
+
+                var dateParts =
+                    
+                    (
+                        from email in db.EmailAddresses
+                        select new
+                        {
+                            email.FileID,
+                            email.Date,
+                            email.SenderID,
+                            email.RecepientID
+                        }
+                    );
+
+                if (senderID != int.MinValue) {
+                    dateParts = dateParts
+                        .Where(x =>
+                            x.SenderID == senderID
+                            );
+                }
+                else
+                {
+                    return Content(
+                        System.Net.HttpStatusCode.BadRequest,
+                        "'SenderID' is a required parameter");
+                }
+
+                if (recepientID != int.MinValue) dateParts =
+                        dateParts
+                        .Where(x =>
+                           x.RecepientID == recepientID
+                        );
+
+                if (!startDate.HasValue)
+                    startDate = DateTime.MinValue;
+
+                if (!endDate.HasValue)
+                    endDate = DateTime.MaxValue;
+
+                dateParts = dateParts
+                    .Where(x =>
+
+                       startDate <= x.Date
+                       &&
+                       endDate >= x.Date
+
+                    );
+
+                Object result;
+
+                var dateExtract = dateParts
+                   .Select(x =>
+                   new
+                   {
+                       x.FileID,
+                       DayOfWeek = DatePart("weekday", x.Date),
+                       Year = DatePart("year", x.Date),
+                       Month = DatePart("month", x.Date),
+                       Hour = DatePart("hour", x.Date),
+                       Quarter = DatePart("quarter", x.Date)
+
+                   });
+
+                // Aggregate by the given viewBy param
+                if ( viewBy == "month")
+                {
+                    result = dateExtract
+                        .GroupBy(x => new { x.Month })
+                        .Select(x => new
+                        {
+                            x.Key.Month,
+                            totalEmails = x.Count()
+                        });
+                }
+                else if ( viewBy == "year" )
+                {
+                    result = dateExtract
+                        .GroupBy(x => new { x.Year })
+                        .Select(x => new
+                        {
+                            x.Key.Year,
+                            totalEmails = x.Count()
+
+                        })
+                        .OrderBy( x => x.Year );
+                }
+                else if ( viewBy == "weekday" )
+                {
+                    result = dateExtract
+                        .GroupBy(x => new { x.DayOfWeek })
+                        .Select(x => new
+                        {
+                            x.Key.DayOfWeek,
+                            totalEmails = x.Count()
+
+                        })
+                        .OrderBy( x => x.DayOfWeek );
+                }
+                else if ( viewBy == "hour" )
+                {
+                    result = dateExtract
+                        .GroupBy(x => new { x.Month })
+                        .Select(x => new
+                        {
+                            x.Key.Month,
+                            totalEmails = x.Count()
+
+                        })
+                        .OrderBy( x => x.Month );
+                }
+                else if ( viewBy == "quarter" )
+                {
+                    result = dateExtract
+                        .GroupBy(x => new { x.Quarter })
+                        .Select(x => new
+                        {
+                            x.Key.Quarter,
+                            totalEmails = x.Count()
+
+                        })
+                        .OrderBy( x => x.Quarter );
+                }
+                else
+                {
+                    return Content(
+                        System.Net.HttpStatusCode.BadRequest,
+                        "Error: '" 
+                        + viewBy 
+                        + "' is not a valid 'viewBy' parameter");
+                }
+
+                return Ok( result );
+            }
+            catch
+            {
+                return InternalServerError();
+            }
+
+        }
+    }
+
+    public class TimestreamController : ApiController
+    {
+        /// 
+        /// Response
+        /// 
+        /// 
+        /// 
+        /// Parameters
+        /// 
+        /// 
+        /// 
+
+        private VenContext db =
+            VenioWebApiHelper.getDatabaseContext();
+
+        [HttpGet]
+        public IHttpActionResult Get(
+            [FromUri] int senderID = int.MinValue,
+            [FromUri] int recepientID = int.MinValue,
+            [FromUri] DateTime? startDate = null,
+            [FromUri] DateTime? endDate = null,
+            [FromUri] string bucket = ""
+            )
+        {
+            try
+            {
+
+                var filterQuery =
+                    from email in db.EmailAddresses
+                    select new
+                    {
+                        email.FileID,
+                        email.Date,
+                        email.SenderID,
+                        email.RecepientID
+                    };
+
+                // Filter for SenderID
+                if ( senderID == int.MinValue)
+                {
+                    return Content(
+                        System.Net.HttpStatusCode.BadRequest,
+                        "Error : SenderID is a required parameter"
+                        );
+                } else
+                {
+                    filterQuery = filterQuery
+                        .Where(x => x.SenderID == senderID );
+                }
+
+                // Filter for RecepientID
+                if ( recepientID != int.MinValue)
+                {
+                    filterQuery = filterQuery
+                        .Where(x => x.RecepientID == recepientID);
+                }
+
+                // Filter for startDate and endDate
+                if ( startDate.HasValue )
+                {
+                    filterQuery = filterQuery
+                        .Where(x => x.Date >= startDate);
+                }
+
+                if ( endDate.HasValue)
+                {
+                    filterQuery = filterQuery
+                        .Where(x => x.Date <= endDate);
+                }
+
+                if (bucket == "" ) bucket = "month";
+
+                // Filter with DateParts
+
+                var mainQuery = filterQuery
+                    .Select(x =>
+                       new
+                       {
+                           x.FileID,
+                           Year = DatePart("year", x.Date),
+                           Month = DatePart("month", x.Date),
+                           Week = DatePart("week", x.Date)
+                       });
+
+                Object result;
+                
+                if ( bucket == "month")
+                {
+                    result = mainQuery
+                        .GroupBy(x =>
+                           new
+                           {
+                               x.Year,
+                               x.Month
+                           })
+                        .Select(x =>
+                           new
+                           {
+                               x.Key.Year,
+                               x.Key.Month,
+                               totalEmails = x.Count()
+                           });
+                }
+                else if ( bucket == "year" )
+                {
+                    result = mainQuery
+                        .GroupBy(x =>
+                            new
+                            {
+                                x.Year
+                            })
+                        .Select(x =>
+                            new
+                            {
+                                x.Key.Year,
+                                totalEmails = x.Count()
+                            });
+                }
+                else if ( bucket == "week" )
+                {
+                    result = mainQuery
+                        .GroupBy(x =>
+                           new
+                           {
+                               x.Year,
+                               x.Week
+                           })
+                        .Select(x =>
+                           new
+                           {
+                               x.Key.Year,
+                               x.Key.Week,
+                               totalEmails = x.Count()
+                           });
+                }
+                else
+                {
+                    // invalid bucket was entered
+                    return Content(
+                        System.Net.HttpStatusCode.BadRequest,
+                        "Error: Invalid 'bucket' parameter"
+                        );
+                }
+
+                return Ok( result );
+            }
+            catch (Exception e)
+            {
+                return InternalServerError();
+            }
+        }
+    }
+
     public static class VenioWebApiHelper
     {
 
@@ -419,7 +793,7 @@ namespace EmailServicesAPI.Controllers
                 );
         }
 
-        public static long getUnknowns()
+        public static long getUnknown()
         {
 
             VenContext db = getDatabaseContext();

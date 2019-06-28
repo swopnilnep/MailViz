@@ -37,4 +37,34 @@ namespace EmailServicesAPI.Models
 
     }
 
+    [Table("tbl_ex_emailmeta")]
+    public class EmailMeta
+    {
+
+        [Key, Column("FileID")]
+        public long FileID { get; set; }
+
+        [Column("DateSent")]
+        public DateTime? DateSent { get; set; }
+
+        [Column("DateReceived")]
+        public DateTime? DateReceived { get; set; }
+
+        [Column("From")]
+        public string From { get; set; }
+
+        [Column("To")]
+        public string To { get; set; }
+
+        [Column("CC")]
+        public string CC { get; set; }
+
+        [Column("BCC")]
+        public string BCC { get; set; }
+
+        [Column("Subject")]
+        public string Subject { get; set; }
+
+    }
+
 }
