@@ -1,83 +1,184 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Interaction } from '../models/interaction';
+import { Query } from '../models/query';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class ApiService {
-  // API Configuration
-  private API_URL = 'http://localhost:51750/api';
-  private API_VERSION = 'v1';
-  private API_INTERACTIONS_CONTROLLER = 'Interactions';
-  private API_PEOPLE_CONTROLLER = 'People';
-  private API_DETAILS_CONTROLLER = 'Details';
-  private API_TIMEFRAME_CONTROLLER = 'Timestream';
+/**
+ * 
+ * Purpose
+ *  This class ApiService, is the main accesspoint
+ *  to the backend API endpoints. It consists of
+ *  details about the APIs and contains GET requests
+ *  that can be called upon by another service or 
+ *  component
+ * 
+ */
+
+ //
+ // Private API Configuration ( Fields )
+ //
+
+  private readonly API_URL : string = 'http://localhost:51750/api';
+  private readonly API_VERSION : string  = 'v1';
+  private readonly API_INTERACTIONS_CONTROLLER : string = 'Interactions';
+  private readonly API_PEOPLE_CONTROLLER : string = 'People';
+  private readonly API_DETAILS_CONTROLLER : string = 'Details';
+  private readonly API_TIMEFRAME_CONTROLLER : string = 'Timestream';
   
-  // Parameters
-  public startDate = '2001-05-06';
-  public endDate = '2001-05-09';
+  //
+  // Public Methods
+  //
+  
+  public getInteractions(
 
-  constructor(private httpClient: HttpClient) { }
-
-  // Get all interaction6
-  getInteractions(): Observable<any> {
-    let q = `${this.API_URL}/${this.API_VERSION}/` +
-      `${this.API_INTERACTIONS_CONTROLLER}`
-
-    if (this.startDate && this.endDate){
-      q += '?';
-      q += `startDate=${this.startDate}&endDate=${this.endDate}`;
-    }
-
-    return this.httpClient.get<Array<Interaction>>
-    (q);
-  }
-
-  // Get all persons
-  getPeople(): Observable<any> {
-    let q = `${this.API_URL}/${this.API_VERSION}/${this.API_PEOPLE_CONTROLLER}`; 
+    startDate? : Date,
+    endDate? : Date
+  
+    ): Observable<any> 
+  {
     
-    if (this.startDate && this.endDate){
-      q += '?';
-      q += `startDate=${this.startDate}&endDate=${this.endDate}`;
-    }
-
-    // console.log(q);
-    return this.httpClient.get<any>(q);
-  }
-
-  // Get Details object with
-  // internal objects: participants, domain, timeseries
-  getDetails( senderID : number ) : Observable<any> {
-    let q = `${this.API_URL}/${this.API_VERSION}/${this.API_DETAILS_CONTROLLER}`; 
+    let query = new Query(this.API_URL);
     
-    q += '?';
-    q += `senderID=${senderID}`
+    query.addPath(this.API_VERSION);
+    query.addPath(this.API_INTERACTIONS_CONTROLLER);
+    
+    if ( startDate )
+      query.addParam(
+        'startDate',
+        startDate.toISOString()
+        );
+    
+    if ( endDate )
+      query.addParam(
+        'endDate',
+        endDate.toISOString()
+        );
 
-    if (this.startDate && this.endDate){
-      q += `&startDate=${this.startDate}` 
-        + `&endDate=${this.endDate}`;
+    return this.httpClient.get<any>
+    ( query.getString() );
+  }
+  
+  public getPeople(
+    
+    startDate? : Date,
+    endDate? : Date
+  
+    ): Observable<any> 
+  {
+    
+    let query = new Query( this.API_URL );
+
+    query.addPath(this.API_VERSION);
+    query.addPath(this.API_PEOPLE_CONTROLLER);
+
+    if ( startDate ){
+      query.addParam(
+        'startDate',
+        startDate.toISOString());
     }
 
-    // console.log(q);
-    return this.httpClient.get<any>(q);
+    if ( endDate ){
+      query.addParam(
+        'endDate',
+        endDate.toISOString());
+    }
+
+    return this.httpClient.get<any>
+    ( query.getString() );
+  }
+  
+  getDetails( 
+
+    senderID : number,
+    recepientID? : number,
+    startDate? : Date,
+    endDate? : Date
+  
+    ) : Observable<any> 
+  {
+
+    let query = new Query( this.API_URL);
+    query.addPath( this.API_VERSION );
+    query.addPath( this.API_DETAILS_CONTROLLER );
+
+    // Required Parameters
+    query.addParam('senderID',senderID);
+    
+    // Optional Parameters
+    if ( recepientID ){
+      query.addParam(
+        'recepientID',
+        recepientID);
+    }
+    
+    if ( startDate ){
+      query.addParam(
+        'startDate',
+        startDate.toISOString());
+    }
+
+    if ( endDate ) {
+      query.addParam(
+        'endDate',
+        endDate.toISOString());
+    }
+    
+    return this.httpClient.get<any>
+    ( query.getString() );
+    
+  }
+  
+  getTimeFrames(
+
+    senderID : number,
+    recepientID? : number,
+    startDate? : Date,
+    endDate? : Date
+
+  ) : Observable<any>
+  {
+
+    let query = new Query(this.API_URL);
+
+    query.addPath(this.API_VERSION);
+    query.addPath(this.API_TIMEFRAME_CONTROLLER);
+    
+    // Required Parameters
+    query.addParam(
+      'senderID',
+      senderID);
+    
+    // Optional Parameters
+    if ( recepientID ){
+      query.addParam(
+        'recepientID',
+        recepientID);
+    }
+
+    if ( startDate ){
+      query.addParam(
+        'startDate',
+        startDate.toISOString()
+        )
+    }
+
+    if ( endDate ){
+      query.addParam(
+        'endDate',
+        endDate.toISOString()
+        );
+    }
+
+    return this.httpClient.get<any>
+    ( query.getString() );
 
   }
 
-  getTimeFrames( 
-    senderID : number, 
-    recepientID? : number, 
-    startDate? : Date, 
-    endDate? :  Date) {
-      let q = `${this.API_URL}/${this.API_VERSION}/${this.API_TIMEFRAME_CONTROLLER}?`; 
-
-      if ( senderID ) q += 'senderID=' + senderID;
-      if ( recepientID ) q += 'recepientID=' + recepientID; 
-
-      return this.httpClient.get<any>(q);
-    }
-
+  constructor(private httpClient: HttpClient) {
+  }
 }

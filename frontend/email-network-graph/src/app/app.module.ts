@@ -1,4 +1,4 @@
-// Modules
+// External / Angular Modules
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
@@ -15,10 +15,11 @@ import { MenuComponent } from './components/menu/menu.component';
 import { TimelineComponent } from './components/timeline/timeline.component';
 import { EmailModalComponent } from './components/email-modal/email-modal.component';
 import { DateRangePickerComponent } from './components/date-range-picker/date-range-picker.component';
+import { DataService } from './services/data.service';
 
 // Plotting Modules
-import * as PlotlyJS from 'plotly.js/dist/plotly.js'; // MIT License
-import { PlotlyModule } from 'angular-plotly.js'; // MIT License
+// import * as PlotlyJS from 'plotly.js/dist/plotly.js'; // MIT License
+// import { PlotlyModule } from 'angular-plotly.js'; // MIT License
 
 @NgModule({
   declarations: [
@@ -34,12 +35,12 @@ import { PlotlyModule } from 'angular-plotly.js'; // MIT License
     HttpClientModule,
     BrowserAnimationsModule,
     FormsModule,
-    PlotlyModule,
+    // PlotlyModule,
     BsDatepickerModule.forRoot(),
     ModalModule.forRoot(),
     TabsModule.forRoot()
   ],
-  providers: [],
+  providers: [DataService],
   bootstrap: [AppComponent],
   entryComponents : [EmailModalComponent]
 })
