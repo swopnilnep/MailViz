@@ -7,6 +7,7 @@ import { DataService } from 'src/app/services/data.service';
 import * as Vis from 'vis';
 import { VisEdge, VisNode}  from 'src/app/models/vis';
 import { VisNetworkOptions } from '../../configurations/options';
+import { NetworkSelectionService } from 'src/app/services/network-selection.service';
 
 // ngx-Bootstrap Imports
 // import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
@@ -41,6 +42,7 @@ export class GraphComponent implements OnInit {
 
   constructor(
     private dataService: DataService,
+    private selection: NetworkSelectionService
     // private modalService : BsModalService
     ) {}
 
@@ -63,9 +65,6 @@ export class GraphComponent implements OnInit {
             this.generateNetworkGraph();
           }
 
-          console.log("Got people in dataset")
-        } else {
-          console.log("Did not get people in dataset, people had no value")
         }
       });     
 
@@ -81,8 +80,6 @@ export class GraphComponent implements OnInit {
           }
         }
       });
-
-
   }
 
   //
