@@ -11,46 +11,48 @@ export class NetworkSelectionService {
   // 
 
   private myDoubleClickedSenderID : 
-    Subject< number >;
+    Subject< number > = new Subject< number >();
 
   private myDoubleClickedRecipientID : 
-    Subject< number >;
+    Subject< number > = new Subject< number >();
 
   // 
   // Public Accessors
   // 
 
-  public getSenderID(){
-    return this.myDoubleClickedSenderID;
+  public getSender(){
+    return this
+        .myDoubleClickedSenderID;
   }
 
-  public getRecipientID(){
-    return this.myDoubleClickedRecipientID;
+  public getRecipient(){
+    return this
+      .myDoubleClickedRecipientID;
   }
 
   // 
   // Public Mutators
   // 
-    
-    public assignSender(id : number){
-      this.myDoubleClickedSenderID
-      .next( id );
-    }
-    
-    public assignRecipient( id : number ){
-      this.myDoubleClickedRecipientID
-      .next( id );
-    }
-    
-    public resetRecipient(){
-      this.myDoubleClickedRecipientID
-      .next( Number.MIN_VALUE );
-    }
-    
-    public resetSender(){
-      this.myDoubleClickedSenderID
-      .next( Number.MIN_VALUE );
-    }
+  
+  public assignSender(id : number){
+    this.myDoubleClickedSenderID
+    .next( id );
+  }
+  
+  public assignRecipient( id : number ){
+    this.myDoubleClickedRecipientID
+    .next( id );
+  }
+  
+  public resetRecipient(){
+    this.myDoubleClickedRecipientID
+    .next( Number.MIN_VALUE );
+  }
+  
+  public resetSender(){
+    this.myDoubleClickedSenderID
+    .next( Number.MIN_VALUE );
+  }
     
   // 
   // Constructor

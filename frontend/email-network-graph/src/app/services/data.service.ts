@@ -23,6 +23,7 @@ export class DataService {
    * Note
    *  Since this service will consist of all the data
    *  in the project, this will only have once instance
+   * ( see [providers] in 'app/app.module.ts' )
    */
   
   // Constructor
@@ -37,14 +38,15 @@ export class DataService {
     
   }
 
-  // Public Class Fields
+  // Private Class Fields
   
-  public startDate : Date = new Date('2001-05-06');
-  public endDate : Date = new Date('2001-05-09');
-  public senderID : number;
-  public recepientID : number;
+  private startDate : Date = new Date('2001-05-06');
+  private endDate : Date = new Date('2001-05-09');
+  private senderID : number; // Currently Selected
+  private recipientID : number; // Currently Selected
 
   // (Observable) Public Class Fields
+
   private people 
   : BehaviorSubject< PersonMap >
     = new BehaviorSubject< PersonMap >(
@@ -55,7 +57,21 @@ export class DataService {
   : BehaviorSubject< Array<Interaction> >
     = new BehaviorSubject< Array<Interaction> >([]);
 
+  private details
+  : BehaviorSubject< Object >
+    = new BehaviorSubject< Object >({});
+
   // Public Accessors
+
+  public getSenderID() : number {
+    return this.senderID;
+  }
+
+  public getRecipientID() : number {
+    return this.recipientID;
+  }
+
+  // Public Accessors (Observable)
 
   public getInteractions()
   : BehaviorSubject< Array<Interaction> >{
@@ -67,9 +83,15 @@ export class DataService {
     return this.people;
   }
 
+  public getDetails()
+  : BehaviorSubject< Object >{
+    this.fetchDetails();
+    return this.details;
+  }
+
   // Public Methods (Fetch)
 
-  public fetchInteractions(){
+  private fetchInteractions(): void {
 
     this.apiService.getInteractions(
       this.startDate, 
@@ -85,7 +107,7 @@ export class DataService {
       })
   }
 
-  public fetchPeople(){
+  private fetchPeople() : void {
 
     this.apiService.getPeople(
       this.startDate,
@@ -107,4 +129,59 @@ export class DataService {
       });
   }
 
+
+  private fetchDetails() : void {
+
+    let domains = new Array<any>();
+    let participants = new Array<Person>();
+
+    this.apiService.getDetails(
+      this.senderID,
+      this.recipientID,
+      this.startDate,
+      this.endDate
+    
+    ).subscribe( response => {
+
+      response
+      .domains
+      .forEach(element => {
+        domains.push( element );
+      });
+
+      response
+      .participants
+      .forEach(element => {
+
+        // Create a new 'Person' and add
+        // it to the Values participants
+        
+        let myPerson = new Person();
+        
+        myPerson.id = 
+          Number( element.recipientID );
+        
+        myPerson.emailName = 
+          this
+          .people.value
+          .get(myPerson.id).emailName;
+        
+        myPerson.emailAddress = 
+          this
+          .people.value
+          .get(myPerson.id).emailAddress;
+
+        myPerson.emailsReceived =
+          element.emailsReceived;
+          
+        participants.push( myPerson );
+
+      })
+    });
+
+    this.details.next(
+      {domains, participants}
+    )
+
+  }
 }

@@ -64,7 +64,6 @@ export class ApiService {
   }
   
   public getPeople(
-    
     startDate? : Date,
     endDate? : Date
   
@@ -92,7 +91,7 @@ export class ApiService {
     ( query.getString() );
   }
   
-  getDetails( 
+  public getDetails( 
 
     senderID : number,
     recepientID? : number,
@@ -133,7 +132,7 @@ export class ApiService {
     
   }
   
-  getTimeFrames(
+  public getTimeFrames(
 
     senderID : number,
     recepientID? : number,
