@@ -287,8 +287,8 @@ namespace EmailServicesAPI.Controllers
 
             // senderID required parameter. Initializes
             // to -2147483648 if not supplied
-            [FromUri] int? senderID = int.MinValue,
-            [FromUri] int? recipientID = null,
+            [FromUri] int senderID = int.MinValue,
+            [FromUri] int? recipientID = int.MinValue,
             [FromUri] DateTime? startDate = null,
             [FromUri] DateTime? endDate = null
             )
@@ -306,7 +306,7 @@ namespace EmailServicesAPI.Controllers
             // for a 'node' or an 'edge' in the frontend
             // Email Network Graph
             bool recipientIsProvided = false;
-            if (recipientID != null)
+            if (recipientID != int.MinValue)
             {
                 recipientIsProvided = true;
             }
@@ -368,7 +368,10 @@ namespace EmailServicesAPI.Controllers
                         {
                             x.Key.RecepientID,
                             EmailsReceived = x.Count()
-                        });
+                        })
+                        .OrderByDescending(x => 
+                            x.EmailsReceived
+                            );
 
                 var tbl_union =
                     li_emails_sender
@@ -422,6 +425,113 @@ namespace EmailServicesAPI.Controllers
         }
 
     }
+
+
+    public class EmailViewController : ApiController
+    {
+
+
+        private VenContext db =
+            VenioWebApiHelper.getDatabaseContext();
+
+        [HttpGet]
+        public IHttpActionResult Get(
+
+            [FromUri] int senderID = int.MinValue,
+            [FromUri] int? recipientID = int.MinValue,
+            [FromUri] DateTime? startDate = null,
+            [FromUri] DateTime? endDate = null
+            )
+        {
+            // Verify SenderID Value is Provided
+            if (senderID == int.MinValue)
+            {
+                return Content(
+                    System.Net.HttpStatusCode.BadRequest,
+                    "Error: Please supply a value for senderID"
+                    );
+            }
+
+            // Based on whether the query is being done
+            // for a 'node' or an 'edge' in the frontend
+            // Email Network Graph
+            bool recipientIsProvided = false;
+            if (recipientID != int.MinValue)
+            {
+                recipientIsProvided = true;
+            }
+
+            // Check the request dateStart and dateEnd values
+            if (startDate.HasValue && endDate.HasValue)
+            {
+
+                if (startDate >= endDate)
+                    return Content(
+                        System.Net.HttpStatusCode.BadRequest,
+                        "End Date cannot be same as or before Start Date");
+            }
+            else
+            {
+                if (!endDate.HasValue) // 'end' has no value
+                    endDate = DateTime.MaxValue;
+                if (!startDate.HasValue) // 'start' has no value
+                    startDate = DateTime.MinValue;
+            }
+
+            try
+            {
+                var tbl_emails_sender =
+                    db.EmailAddresses
+                    .Where(x =>
+                            (x.SenderID == senderID)
+                        &&
+                            (x.Date >= startDate && x.Date <= endDate)
+                        );
+
+                if (recipientIsProvided)
+                {
+                    tbl_emails_sender = tbl_emails_sender
+                        .Where(x => x.RecepientID == recipientID);
+                }
+
+
+                var tbl_selected_fileIds =
+                    tbl_emails_sender
+                    .Select(x =>
+                       new
+                       {
+                           x.FileID
+                       });
+
+                var sender_merge_with_meta =
+                        from fileID in tbl_selected_fileIds
+                        join metaFile in db.EmailMeta
+                        on fileID.FileID equals metaFile.FileID
+
+                        select new
+                        {
+                            metaFile.FileID,
+                            metaFile.From,
+                            metaFile.To,
+                            metaFile.Subject,
+                            metaFile.CC,
+                            metaFile.BCC,
+                            metaFile.DateSent
+                        };
+                    
+                   
+
+                return Ok( sender_merge_with_meta );
+            }
+            catch (Exception e)
+            {
+                return InternalServerError();
+            }
+        }
+
+    }
+
+
 
     public class TimeAggregateController : ApiController
     {
@@ -619,6 +729,97 @@ namespace EmailServicesAPI.Controllers
                 return InternalServerError();
             }
 
+        }
+    }
+
+    public class TimeSeriesController : ApiController
+    {
+        /// 
+        /// Response
+        /// 
+        /// 
+        /// 
+        /// Parameters
+        /// 
+        /// 
+        /// 
+
+        private VenContext db =
+            VenioWebApiHelper.getDatabaseContext();
+
+        [HttpGet]
+        public IHttpActionResult Get(
+            [FromUri] int senderID = int.MinValue,
+            [FromUri] int recepientID = int.MinValue,
+            [FromUri] DateTime? startDate = null,
+            [FromUri] DateTime? endDate = null,
+            [FromUri] string bucket = ""
+            )
+        {
+            try
+            {
+
+                var filterQuery =
+                    from email in db.EmailAddresses
+                    select new
+                    {
+                        email.FileID,
+                        email.Date,
+                        email.SenderID,
+                        email.RecepientID
+                    };
+
+                // Filter for SenderID
+                if (senderID == int.MinValue)
+                {
+                    return Content(
+                        System.Net.HttpStatusCode.BadRequest,
+                        "Error : SenderID is a required parameter"
+                        );
+                }
+                else
+                {
+                    filterQuery = filterQuery
+                        .Where(x => x.SenderID == senderID);
+                }
+
+                // Filter for RecepientID
+                if (recepientID != int.MinValue)
+                {
+                    filterQuery = filterQuery
+                        .Where(x => x.RecepientID == recepientID);
+                }
+
+                // Filter for startDate and endDate
+                if (startDate.HasValue)
+                {
+                    filterQuery = filterQuery
+                        .Where(x => x.Date >= startDate);
+                }
+
+                if (endDate.HasValue)
+                {
+                    filterQuery = filterQuery
+                        .Where(x => x.Date <= endDate);
+                }
+
+                // MainQuery Return TimeStream Data
+
+                var result =
+                    filterQuery
+                    .Select(x =>
+                   new
+                   {
+                       x.Date,
+                       //x.FileID
+                   });
+
+                return Ok( result.ToList() );
+            }
+            catch (Exception e)
+            {
+                return InternalServerError();
+            }
         }
     }
 
