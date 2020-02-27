@@ -1,4 +1,16 @@
 export class VisNetworkOptions {
+
+  /**
+   * 
+   * The VisNetworkOptions class is declared 
+   * as an object representing 
+   * the 'options' for the Vis
+   * Network Object
+   * 
+   */
+
+
+
     physics = {
         enabled: true,
         barnesHut: {

@@ -1,85 +1,133 @@
-<div class="modal-header">
-    <h4 class="modal-title pull-left">{{title}}</h4>
-    <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
-      <span aria-hidden="true">&times;</span>
-    </button>
-</div>
-<div class="modal-body large-modal">
-    <tabset [justified]="true">
-        <tab heading="Domains">
-            <br>
-            <div class="row">
-                <div class="col-9">
-                    <div class="alert alert-success">
-                        The selection involved communications with
-                        email addresses belonging to the following domains
-                    </div> 
-                </div>
-                <div class="col-3">
-                    <button type="button" (click)="exportToCsv('participants')" class="btn btn-primary">Export</button>
-                </div>
-            </div>
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Emails</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let d of domains; index as i">
-                    <td>{{ i + 1}}</td>
-                    <td>{{ d.domainName }}</td>
-                    <td>{{ d.totalEmails }}</td>
-                    </tr>
-                </tbody>
-            </table>
-        </tab>
-        <tab heading="Participants">
-            <br>
-            <div class="row">
-                <div class="col-9">
-                    <div class="alert alert-success">
-                        The selection involves communications
-                        between the following participants
-                    </div> 
-                </div>
-                <div class="col-3">
-                    <button type="button" (click)="exportToCsv('participants')" class="btn btn-primary">Export</button>
-                </div>
-            </div>
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Sent</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let p of participants; index as i">
-                    <td>{{ i + 1}}</td>
-                    <td>{{ p.emailName }}</td>
-                    <td>{{ p.emailAddress }}</td>
-                    <td>{{ p.emailsReceived }}</td>
-                    </tr>
-                </tbody>
-            </table>
-        </tab>
-        <tab heading="Timeline">
-            <div id="visualization"></div>
-        </tab>
-        <tab heading="Trends">
-            <div id="visualization"></div>
-        </tab>
-        <tab heading="View">
-            This will be a table of the person's emails
-        </tab>
+<div>
+    <div class="modal-header">
+        
+        <div *ngIf="recipientName; then EdgeViewTitle; else NodeViewTitle"></div>
+        <ng-template #EdgeViewTitle>
+            <h4 class="modal-title pull-left">Emails sent by <b>{{ senderName }}</b> to <b>{{ recipientName }}</b></h4>
+        </ng-template> 
+        <ng-template #NodeViewTitle>
+            <h4 class="modal-title pull-left">Emails sent by <b>{{ senderName }}</b></h4>
+        </ng-template>
 
-    </tabset>
-</div>
-<div class="modal-footer">
-    <button type="button" class="btn btn-default" (click)="bsModalRef.hide()">{{closeBtnName}}</button>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+        <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <tabset [justified]="true">
+            <tab heading="Domains">
+                <br>
+                <div class="row">
+                    <div class="col-lg-11 col-md-10 col-sm-9">
+                        <div class="alert alert-info">
+                                In the selected communication, {{ senderName }} sent emails 
+                                to recipient(s) originating from the following domains. 
+                                These include direct (to), carbon copy (cc) and blind carbon copy (bcc) recipients
+                        </div> 
+                        
+                    </div>
+                    <div class="col-lg-1 col-md-2 col-sm-3">
+                        <button type="button" (click)="exportToCsv('participants')" class="btn btn-primary">Export</button>
+                    </div>
+                </div>
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Recipient (Domain)</th>
+                        <th scope="col">Total Emails</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let d of domains; index as i">
+                        <td>{{ i + 1}}</td>
+                        <td>{{ d.domainName }}</td>
+                        <td>{{ d.totalEmails }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </tab>
+            <tab heading="Participants">
+                <br>
+                <div class="row">
+                    <div class="col-lg-11 col-md-10 col-sm-9">
+                        <div class="alert alert-info">
+                            In the selected communications, the following people
+                            were also involved in emails that were sent directly (to), as a carbon copy (cc),
+                            or blind carbon copy (bcc).
+                        </div> 
+                    </div>
+                    <div class="col-lg-1 col-md-2 col-sm-3">
+                        <button type="button" (click)="exportToCsv('participants')" class="btn btn-primary">Export</button>
+                    </div>
+                </div>
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Recipient</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Total Emails</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let p of participants; index as i">
+                        <td>{{ i + 1}}</td>
+                        <td>{{ p.emailName }}</td>
+                        <td>{{ p.emailAddress }}</td>
+                        <td>{{ p.emailsReceived }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </tab>
+            <tab heading="Timeline">
+                <plotly-plot align="center" [data]="timeline.data" [layout]="timeline.layout"></plotly-plot>
+                <!-- <div id="timeline"></div> -->
+            </tab>
+            <tab heading="Trends">
+                <div id="visualization"></div>
+            </tab>
+            <tab heading="View">
+                <br>
+                <div class="row">
+                    <div class="col-lg-11 col-md-10 col-sm-9">
+                        <div class="alert alert-info">
+                            In the selected communications, the following people
+                            were also involved in emails that were sent directly (to), as a carbon copy (cc),
+                            or blind carbon copy (bcc).
+                        </div> 
+                    </div>
+                    <div class="col-lg-1 col-md-2 col-sm-3">
+                        <button type="button" (click)="exportToCsv('participants')" class="btn btn-primary">Export</button>
+                    </div>
+                </div>
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Id</th>
+                        <th scope="col">Subject</th>
+                        <th scope="col">From</th>
+                        <th scope="col">To</th>
+                        <th scope="col">CC</th>
+                        <th scope="col">BCC</th>
+                        <th scope="col">Date Sent</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let email of emailView; index as i">
+                        <td>{{ i + 1}}</td>
+                        <td>{{ email.id }}</td>
+                        <td>{{ email.subject }}</td>
+                        <td>{{ email.from }}</td>
+                        <td>{{ email.to }}</td>
+                        <td>{{ email.cc }}</td>
+                        <td>{{ email.bcc }}</td>
+                        <td>{{ email.date }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </tab>
+        </tabset>
+    </div>
 </div>

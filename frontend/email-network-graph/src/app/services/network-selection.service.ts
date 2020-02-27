@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -11,10 +11,12 @@ export class NetworkSelectionService {
   // 
 
   private myDoubleClickedSenderID : 
-    Subject< number > = new Subject< number >();
+    BehaviorSubject< number > = 
+      new BehaviorSubject< number >(Number.MIN_VALUE);
 
   private myDoubleClickedRecipientID : 
-    Subject< number > = new Subject< number >();
+    BehaviorSubject< number > = 
+      new BehaviorSubject< number >(Number.MIN_VALUE);
 
   // 
   // Public Accessors
@@ -22,7 +24,7 @@ export class NetworkSelectionService {
 
   public getSender(){
     return this
-        .myDoubleClickedSenderID;
+      .myDoubleClickedSenderID;
   }
 
   public getRecipient(){
@@ -46,12 +48,12 @@ export class NetworkSelectionService {
   
   public resetRecipient(){
     this.myDoubleClickedRecipientID
-    .next( Number.MIN_VALUE );
+    .next( null );
   }
   
   public resetSender(){
     this.myDoubleClickedSenderID
-    .next( Number.MIN_VALUE );
+    .next( null );
   }
     
   // 

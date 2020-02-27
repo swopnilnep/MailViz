@@ -59,7 +59,7 @@ export class Query{
 
     }
 
-    public addParam( 
+    public addParameter( 
         
         accessor: string, 
         parameter: any 

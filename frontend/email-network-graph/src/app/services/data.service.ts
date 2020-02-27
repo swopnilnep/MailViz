@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { ApiService } from './api.service';
 import { PersonMap, Person } from '../models/person';
 import { Interaction } from '../models/interaction';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subscription } from 'rxjs';
+import { NetworkSelectionService } from './network-selection.service';
 
 @Injectable({
   providedIn: 'root'
@@ -23,18 +24,39 @@ export class DataService {
    * Note
    *  Since this service will consist of all the data
    *  in the project, this will only have once instance
-   * ( see [providers] in 'app/app.module.ts' )
+   * ( see 'providers' in 'app/app.module.ts' )
    */
   
   // Constructor
   
-  constructor(private apiService : ApiService) {
+  constructor(
+    private apiService : ApiService,
+    private selectionService: NetworkSelectionService
+    ) {
 
     // This will only run once as class 'DataService'
     // can only have one instance
     
     this.fetchPeople();
     this.fetchInteractions();
+
+    this.subscriptions.add(
+      this
+        .selectionService
+        .getRecipient()
+        .subscribe( value => {
+          this.recipientID = value;
+        })
+    );
+
+    this.subscriptions.add(
+      this
+        .selectionService
+        .getSender()
+        .subscribe( value => {
+          this.senderID = value;
+        })
+    );
     
   }
 
@@ -44,6 +66,7 @@ export class DataService {
   private endDate : Date = new Date('2001-05-09');
   private senderID : number; // Currently Selected
   private recipientID : number; // Currently Selected
+  private subscriptions = new Subscription();
 
   // (Observable) Public Class Fields
 
@@ -58,8 +81,16 @@ export class DataService {
     = new BehaviorSubject< Array<Interaction> >([]);
 
   private details
-  : BehaviorSubject< Object >
-    = new BehaviorSubject< Object >({});
+  : BehaviorSubject< any >
+    = new BehaviorSubject< any >(null);
+
+  private timeSeries
+  : BehaviorSubject< any >
+    = new BehaviorSubject< any >(null);
+
+  private emailView
+  : BehaviorSubject< any >
+    = new BehaviorSubject< any >(null);
 
   // Public Accessors
 
@@ -69,6 +100,14 @@ export class DataService {
 
   public getRecipientID() : number {
     return this.recipientID;
+  }
+
+  public getStartDate()  : Date {
+    return this.startDate;
+  }
+
+  public getEndDate() : Date {
+    return this.endDate;
   }
 
   // Public Accessors (Observable)
@@ -89,9 +128,70 @@ export class DataService {
     return this.details;
   }
 
+  public getTimeSeries()
+  : BehaviorSubject< any >{
+    this.fetchTimeSeries();
+    return this.timeSeries;
+  }
+
+  public getEmailView()
+  : BehaviorSubject< any >{
+    this.fetchEmailView();
+    return this.emailView;
+  }
+
   // Public Methods (Fetch)
 
-  private fetchInteractions(): void {
+  private fetchEmailView() : void {
+    this.apiService.getEmailView(
+      this.senderID,
+      this.recipientID,
+      this.startDate,
+      this.endDate
+    ).subscribe(response => {
+      let tempEmailView = new Array<any>();
+      response.forEach(element => {
+
+        let item = {};
+        item["id"] = element["fileID"];
+        item["from"] = element["from"];
+        item["to"] = element["to"];
+        item["cc"] = element["cc"];
+        item["bcc"] = element["bcc"];
+        item["subject"] = String( element["subject"] );
+        item["date"] = new Date( element["dateSent"] );
+        
+        tempEmailView.push(item);
+
+      });
+
+      this.emailView.next( tempEmailView );
+    })
+  }
+
+  private fetchTimeSeries() : void {
+
+    this.apiService.getTimeSeries(
+      this.senderID,
+      this.recipientID,
+      // this.startDate,
+      // this.endDate
+
+    ).subscribe(response => {
+
+      let tempTimeSeriesArray = new Array<any>();
+      response.forEach(element => {
+        tempTimeSeriesArray
+          .push( new Date(element["date"]) );
+      });
+      
+      this.timeSeries.next( tempTimeSeriesArray );
+    })
+
+
+  }
+
+  private fetchInteractions() : void {
 
     this.apiService.getInteractions(
       this.startDate, 
@@ -159,7 +259,7 @@ export class DataService {
         let myPerson = new Person();
         
         myPerson.id = 
-          Number( element.recipientID );
+          Number( element['recepientID'] );
         
         myPerson.emailName = 
           this
@@ -172,7 +272,7 @@ export class DataService {
           .get(myPerson.id).emailAddress;
 
         myPerson.emailsReceived =
-          element.emailsReceived;
+          element['emailsReceived'];
           
         participants.push( myPerson );
 
@@ -180,7 +280,10 @@ export class DataService {
     });
 
     this.details.next(
-      {domains, participants}
+      {
+        domains: domains, 
+        participants: participants
+      }
     )
 
   }

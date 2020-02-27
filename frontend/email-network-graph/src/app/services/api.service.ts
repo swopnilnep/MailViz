@@ -28,7 +28,9 @@ export class ApiService {
   private readonly API_INTERACTIONS_CONTROLLER : string = 'Interactions';
   private readonly API_PEOPLE_CONTROLLER : string = 'People';
   private readonly API_DETAILS_CONTROLLER : string = 'Details';
-  private readonly API_TIMEFRAME_CONTROLLER : string = 'Timestream';
+  private readonly API_TIMESTREAM_CONTROLLER : string = 'Timestream';
+  private readonly API_TIMESERIES_CONTROLLER : string = 'TimeSeries';
+  private readonly API_EMAIL_VIEW_CONTROLLER : string = 'EmailView';
   
   //
   // Public Methods
@@ -48,13 +50,13 @@ export class ApiService {
     query.addPath(this.API_INTERACTIONS_CONTROLLER);
     
     if ( startDate )
-      query.addParam(
+      query.addParameter(
         'startDate',
         startDate.toISOString()
         );
     
     if ( endDate )
-      query.addParam(
+      query.addParameter(
         'endDate',
         endDate.toISOString()
         );
@@ -76,13 +78,13 @@ export class ApiService {
     query.addPath(this.API_PEOPLE_CONTROLLER);
 
     if ( startDate ){
-      query.addParam(
+      query.addParameter(
         'startDate',
         startDate.toISOString());
     }
 
     if ( endDate ){
-      query.addParam(
+      query.addParameter(
         'endDate',
         endDate.toISOString());
     }
@@ -94,7 +96,7 @@ export class ApiService {
   public getDetails( 
 
     senderID : number,
-    recepientID? : number,
+    recipientID? : number,
     startDate? : Date,
     endDate? : Date
   
@@ -106,23 +108,23 @@ export class ApiService {
     query.addPath( this.API_DETAILS_CONTROLLER );
 
     // Required Parameters
-    query.addParam('senderID',senderID);
+    query.addParameter('senderID',senderID);
     
     // Optional Parameters
-    if ( recepientID ){
-      query.addParam(
-        'recepientID',
-        recepientID);
+    if ( recipientID ){
+      query.addParameter(
+        'recipientID',
+        recipientID);
     }
     
     if ( startDate ){
-      query.addParam(
+      query.addParameter(
         'startDate',
         startDate.toISOString());
     }
 
     if ( endDate ) {
-      query.addParam(
+      query.addParameter(
         'endDate',
         endDate.toISOString());
     }
@@ -135,7 +137,7 @@ export class ApiService {
   public getTimeFrames(
 
     senderID : number,
-    recepientID? : number,
+    recipientID? : number,
     startDate? : Date,
     endDate? : Date
 
@@ -145,34 +147,114 @@ export class ApiService {
     let query = new Query(this.API_URL);
 
     query.addPath(this.API_VERSION);
-    query.addPath(this.API_TIMEFRAME_CONTROLLER);
+    query.addPath(this.API_TIMESTREAM_CONTROLLER);
     
     // Required Parameters
-    query.addParam(
+    query.addParameter(
       'senderID',
       senderID);
     
     // Optional Parameters
-    if ( recepientID ){
-      query.addParam(
-        'recepientID',
-        recepientID);
+    if ( recipientID ){
+      query.addParameter(
+        'recipientID',
+        recipientID);
     }
 
     if ( startDate ){
-      query.addParam(
+      query.addParameter(
         'startDate',
         startDate.toISOString()
         )
     }
 
     if ( endDate ){
-      query.addParam(
+      query.addParameter(
         'endDate',
         endDate.toISOString()
         );
     }
 
+    return this.httpClient.get<any>
+    ( query.getString() );
+
+  }
+
+  public getEmailView(
+
+    senderID: number,
+    recipientID?: number,
+    startDate?: Date,
+    endDate?: Date
+
+  ){
+    
+    let query = new Query( this.API_URL);
+    query.addPath( this.API_VERSION );
+    query.addPath( this.API_EMAIL_VIEW_CONTROLLER );
+
+    // Required Parameters
+    query.addParameter('senderID',senderID);
+    
+    // Optional Parameters
+    if ( recipientID ){
+      query.addParameter(
+        'recipientID',
+        recipientID);
+    }
+    
+    if ( startDate ){
+      query.addParameter(
+        'startDate',
+        startDate.toISOString());
+    }
+
+    if ( endDate ) {
+      query.addParameter(
+        'endDate',
+        endDate.toISOString());
+    }
+    
+    return this.httpClient.get<any>
+    ( query.getString() );
+
+  }
+
+  public getTimeSeries(
+
+    senderID: number,
+    recipientID?: number,
+    startDate?: Date,
+    endDate?: Date
+
+  ){
+    
+    let query = new Query( this.API_URL);
+    query.addPath( this.API_VERSION );
+    query.addPath( this.API_TIMESERIES_CONTROLLER );
+
+    // Required Parameters
+    query.addParameter('senderID',senderID);
+    
+    // Optional Parameters
+    if ( recipientID ){
+      query.addParameter(
+        'recipientID',
+        recipientID);
+    }
+    
+    if ( startDate ){
+      query.addParameter(
+        'startDate',
+        startDate.toISOString());
+    }
+
+    if ( endDate ) {
+      query.addParameter(
+        'endDate',
+        endDate.toISOString());
+    }
+    
     return this.httpClient.get<any>
     ( query.getString() );
 

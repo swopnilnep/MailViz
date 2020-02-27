@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, TemplateRef, OnInit, OnDestroy } from '@angular/core';
 import { PersonMap } from '../../models/person';
 import { Interaction } from 'src/app/models/interaction';
 import { DataService } from 'src/app/services/data.service';
 import { Subscription } from 'rxjs';
 import { NetworkSelectionService } from 'src/app/services/network-selection.service';
+import { EmailModalComponent } from '../email-modal/email-modal.component';
 
 // Vis Classes
 
@@ -11,13 +12,26 @@ import * as Vis from 'vis';
 import { VisEdge, VisNode}  from 'src/app/models/vis';
 import { VisNetworkOptions } from '../../configurations/options';
 
+// NGX-Bootstrap
+
+import { BsModalService } from 'ngx-bootstrap/modal'
+
 @Component({
   selector: 'app-graph',
   templateUrl: './graph.component.html',
   styleUrls: ['./graph.component.css']
 })
 
-export class GraphComponent implements OnInit {
+export class GraphComponent implements OnInit, OnDestroy {
+
+  /**
+   * 
+   * Component that interacts with the 
+   * Vis.js Network generation Library to
+   * Generate a network graph on the HTML DOM
+   * Element
+   * 
+   */
 
   //
   // Class Fields
@@ -35,7 +49,8 @@ export class GraphComponent implements OnInit {
 
   constructor(
     private dataService: DataService,
-    private selectionService: NetworkSelectionService
+    private selectionService: NetworkSelectionService,
+    private modalService: BsModalService
     ) {}
   
   //
@@ -166,6 +181,7 @@ export class GraphComponent implements OnInit {
 
     // Update the loading progress indicator (spinner)
     // Based on Vis Network interactions
+
     this.network.on(
       'stabilizationProgress', 
       function(params) {
@@ -183,10 +199,10 @@ export class GraphComponent implements OnInit {
     this.network.once(
       'stabilizationIterationsDone', 
       function() {
-      document.getElementById('spinner')
+        document.getElementById('spinner')
         .style
         .display = 'none';
-    });
+      });
 
     this.network.on('doubleClick', (params) => {
 
@@ -211,12 +227,12 @@ export class GraphComponent implements OnInit {
       if ( nodeAtPoint ) {
         
         let senderID = Number( nodeAtPoint );
-        
-        this.selectionService
-          .assignSender( senderID );
 
         this.selectionService
           .resetRecipient();
+        
+        this.selectionService
+          .assignSender( senderID );
 
       } else if ( edgeAtPoint ) {
 
@@ -230,14 +246,27 @@ export class GraphComponent implements OnInit {
         let recipientID : number = Number( edge.to );
 
         this.selectionService
-            .assignSender( senderID );
-
-        this.selectionService
             .assignRecipient( recipientID );
 
+        this.selectionService
+            .assignSender( senderID );
       }
 
+      // Popup the EmailModal
+      this.popupModal();
+
     })
+  }
+
+  private popupModal(){
+  
+    this
+      .modalService
+      .show(
+        EmailModalComponent,
+        Object.assign({}, {class:'modal-lg-custom full-width'})
+        );
 
   }
+
 }

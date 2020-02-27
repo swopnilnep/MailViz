@@ -21,8 +21,10 @@ import { DataService } from './services/data.service';
 import { NetworkSelectionService } from './services/network-selection.service';
 
 // Plotting Modules
-// import * as PlotlyJS from 'plotly.js/dist/plotly.js'; // MIT License
-// import { PlotlyModule } from 'angular-plotly.js'; // MIT License
+import * as PlotlyJS from 'plotly.js/dist/plotly.js'; // MIT License
+import { PlotlyModule } from 'angular-plotly.js'; // MIT License
+import { CommonModule } from '@angular/common';
+PlotlyModule.plotlyjs = PlotlyJS;
 
 @NgModule({
   declarations: [
@@ -34,11 +36,12 @@ import { NetworkSelectionService } from './services/network-selection.service';
     DateRangePickerComponent,
   ],
   imports: [
+    CommonModule,
     BrowserModule,
     HttpClientModule,
     BrowserAnimationsModule,
     FormsModule,
-    // PlotlyModule,
+    PlotlyModule,
     BsDatepickerModule.forRoot(),
     ModalModule.forRoot(),
     TabsModule.forRoot()
