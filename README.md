@@ -1,4 +1,4 @@
-# Viz: Email Analytics Platform
+# MailViz: An Email Visualization and Analytics Platform
 
 ## Philosophy
 
