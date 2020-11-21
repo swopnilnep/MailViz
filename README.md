@@ -55,7 +55,7 @@ npm start
 
 ## Contributing
 
-* If you would like to make a feature request: Make an Issue tagged as `enchancement`
+* If you would like to make a feature request: Make an Issue tagged as `enhancement`
 * If you encounter any bugs or errors: Make an Issue tagged as `bug`
 * If you would like to make your own commits, Branch, Commit and Make a pull request! 
 
