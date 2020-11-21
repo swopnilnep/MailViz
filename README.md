@@ -1,5 +1,6 @@
 # MailViz
 > An Email Visualization and Analytics Platform
+`ASP.NET Web Framework 2018`, `.NET Web API 2018`, `Angular 9`, `Microsoft SQL Server 2017`
 
 ## Philosophy
 
@@ -40,7 +41,7 @@ Here are the setup instructions for each of the components of the project:
 5. Install other requirements
 
 ### Database
-`Microsoft SQL Server 2018`
+`Microsoft SQL Server 2017`
 
 1. Import the Database Schema from the Enron Emails Database
 
