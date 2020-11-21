@@ -17,7 +17,7 @@ The Graph, colors and sizes of the nodes and edges are easily configurable with 
 
 ## Examples
 
-![Figure 1: Expanded View of Nodes](images/expanded.jpg)
+![Figure 1: Expanded View of over 1,000 Nodes and 300,000 emails](images/expanded.jpg)
 *Figure 1: Expanded View of Nodes*
 
 ![Figure 2: Zoomed View of Nodes](images/zoomed.jpg)
