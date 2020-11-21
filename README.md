@@ -1,7 +1,7 @@
 # MailViz
 
 **An Email Analytics and Visualization Platform**
-Tools: `ASP.NET Web Framework 2018`, `.NET Web API 2018`, `Angular 9`, `Microsoft SQL Server 2017`
+<br>Tools: `ASP.NET Web Framework 2018`, `.NET Web API 2018`, `Angular 9`, `Microsoft SQL Server 2017`
 
 ## Philosophy
 
