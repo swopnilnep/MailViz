@@ -36,7 +36,7 @@ Here are the setup instructions for each of the components of the project:
 `ASP.NET Web Framework 2018`
 
 1. Installing Visual Studio
-2. Install ASP.NET Web Framework (not Core)
+2. Install ASP.NET Web API Framework (not Core)
 3. Load the directory `backend/EmailServicesAPI/backend` as a .NET Web Framework REST API Application. 
 4. Install LINQ
 5. Install other requirements
@@ -44,6 +44,7 @@ Here are the setup instructions for each of the components of the project:
 ### Database
 `Microsoft SQL Server 2017`
 
+1. Setup Microsoft SQL Server 2017
 1. Import the Database Schema from the Enron Emails Database
 
 ### Frontend
